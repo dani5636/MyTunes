@@ -27,7 +27,7 @@ public class GenreHandler {
         //a try/catch block
         try (BufferedReader CSVFile
                 = new BufferedReader(new FileReader("DATA/genres.txt"))) {
-            CSVFile.readLine();// Throws away the header, first line.
+           
             String dataLine = CSVFile.readLine();
             while (dataLine != null) { //process all lines
                 genres.add(dataLine);
@@ -52,7 +52,7 @@ public class GenreHandler {
 
         }
         try (BufferedWriter bw = new BufferedWriter(
-                new FileWriter("genres.txt")
+                new FileWriter("DATA/genres.txt")
         )) {
             bw.write(csvString);
 

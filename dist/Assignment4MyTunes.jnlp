@@ -11,7 +11,7 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Assignment4MyTunes.jar" size="12189" download="eager" />
+    <jar href="Assignment4MyTunes.jar" size="14182" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Assignment4MyTunes" >
     <param name="requiredFXVersion" value="8.0+"/>

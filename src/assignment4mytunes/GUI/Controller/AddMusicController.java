@@ -5,7 +5,7 @@
  */
 package assignment4mytunes.GUI.Controller;
 
-import assignment4mytunes.BLL.GenreManager;
+import assignment4mytunes.GUI.Model.MusicModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,7 +21,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -42,14 +41,13 @@ public class AddMusicController implements Initializable {
     private TextField txtPath;
     @FXML
     private ChoiceBox<String> choiceGenre;
-    
-    private GenreManager genreManager = new GenreManager();
+    private MusicModel musicModel = new MusicModel();
+
     @FXML
     private Button btnGenre;
-    
 
     public AddMusicController() {
-        
+
     }
 
     /**
@@ -58,32 +56,26 @@ public class AddMusicController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ObservableList<String> genres
-                = FXCollections.observableArrayList(genreManager.loadGenres());
-        choiceGenre.setItems(genres);
-        
-    }    
-    
+        updateGenres();
+
+    }
+
     @FXML
     private void AddGenres(ActionEvent event) throws IOException {
-        Stage primaryStage = (Stage)btnGenre.getScene().getWindow();
-       FXMLLoader loader =
-               new FXMLLoader(getClass().getResource("/assignment4mytunes/GUI/View/AddGenre.fxml"));
-       Parent root = loader.load();
-       
-       
-       
-       Stage subStage = new Stage();
-       subStage.setScene(new Scene(root));
-      
-       //set modal window
-       subStage.initModality(Modality.WINDOW_MODAL);
-       subStage.initOwner(primaryStage);
-       
-       subStage.show();
+        Stage primaryStage = (Stage) btnGenre.getScene().getWindow();
+        FXMLLoader loader
+                = new FXMLLoader(getClass().getResource("/assignment4mytunes/GUI/View/AddGenre.fxml"));
+        Parent root = loader.load();
+        Stage subStage = new Stage();
+        subStage.setScene(new Scene(root));
+        AddGenreController gController = 
+               loader.getController();
+        gController.setAddGenreController(this);
+        //set modal window
+        subStage.initModality(Modality.WINDOW_MODAL);
+        subStage.initOwner(primaryStage);
+        subStage.show();
     }
-    
-   
 
     @FXML
     private void FindFile(ActionEvent event) {
@@ -97,6 +89,10 @@ public class AddMusicController implements Initializable {
     private void Save(ActionEvent event) {
     }
 
-    
-    
+    public void updateGenres() {
+        ObservableList<String> genres
+                = FXCollections.observableArrayList(musicModel.loadGenre());
+        choiceGenre.setItems(genres);
+    }
+
 }

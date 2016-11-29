@@ -1,4 +1,7 @@
-
+Country
 Rock
+Classic
 Techno
 Pop
+Rap
+Punk

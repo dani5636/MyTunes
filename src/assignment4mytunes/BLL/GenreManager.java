@@ -14,13 +14,14 @@ import java.util.List;
  * @author Mecaa
  */
 public class GenreManager {
+
     private final GenreHandler genreHandler = new GenreHandler();
-    public ArrayList<String> loadGenres()
-    {
+
+    public ArrayList<String> loadGenres() {
         return (ArrayList<String>) genreHandler.loadGenres();
     }
-    public void saveGenres(List<String> genres)
-    {
+
+    public void saveGenres(List<String> genres) {
         genreHandler.saveGenres(genres);
     }
 }
