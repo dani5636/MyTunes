@@ -77,3 +77,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+build/built-jar.properties
+dist/Assignment4MyTunes.html
+dist/Assignment4MyTunes.html

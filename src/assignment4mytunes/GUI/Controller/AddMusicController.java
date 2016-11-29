@@ -6,6 +6,7 @@
 package assignment4mytunes.GUI.Controller;
 
 import assignment4mytunes.BLL.GenreManager;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -13,10 +14,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -37,6 +44,8 @@ public class AddMusicController implements Initializable {
     private ChoiceBox<String> choiceGenre;
     
     private GenreManager genreManager = new GenreManager();
+    @FXML
+    private Button btnGenre;
     
 
     public AddMusicController() {
@@ -56,8 +65,22 @@ public class AddMusicController implements Initializable {
     }    
     
     @FXML
-    private void AddGenres(ActionEvent event) {
+    private void AddGenres(ActionEvent event) throws IOException {
+        Stage primaryStage = (Stage)btnGenre.getScene().getWindow();
+       FXMLLoader loader =
+               new FXMLLoader(getClass().getResource("/assignment4mytunes/GUI/View/AddGenre.fxml"));
+       Parent root = loader.load();
        
+       
+       
+       Stage subStage = new Stage();
+       subStage.setScene(new Scene(root));
+      
+       //set modal window
+       subStage.initModality(Modality.WINDOW_MODAL);
+       subStage.initOwner(primaryStage);
+       
+       subStage.show();
     }
     
    
