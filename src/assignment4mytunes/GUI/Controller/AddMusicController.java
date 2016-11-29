@@ -59,7 +59,7 @@ public class AddMusicController implements Initializable {
     private void AddGenres(ActionEvent event) {
        
     }
-    @FXML
+    
    
 
     @FXML
