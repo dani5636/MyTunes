@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment4mytunes.GUI.Controller.AddEditController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment4mytunes.GUI.Controller.AddMusicController">
    <children>
       <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="362.0" prefWidth="216.0">
          <children>
@@ -22,9 +22,9 @@
       <TextField fx:id="txtTime" layoutX="237.0" layoutY="185.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="283.0" AnchorPane.topAnchor="187.0" />
       <TextField fx:id="txtPath" layoutX="237.0" layoutY="236.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="237.0" />
       <ChoiceBox fx:id="choiceGenre" layoutX="200.0" layoutY="142.0" prefHeight="31.0" prefWidth="187.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="283.0" AnchorPane.topAnchor="137.0" />
-      <Button fx:id="btnMore" layoutX="326.0" layoutY="137.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="120.0" text="More..." AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="137.0" />
-      <Button fx:id="btnChoose" layoutX="469.0" layoutY="237.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="120.0" text="Choose..." />
-      <Button fx:id="btnCancel" layoutX="405.0" layoutY="305.0" mnemonicParsing="false" text="Cancel" />
-      <Button fx:id="btnSave" layoutX="504.0" layoutY="305.0" mnemonicParsing="false" text="Save" />
+      <Button layoutX="326.0" layoutY="137.0" mnemonicParsing="false" onAction="#AddGenres" prefHeight="31.0" prefWidth="120.0" text="More..." AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="137.0" />
+      <Button layoutX="469.0" layoutY="237.0" mnemonicParsing="false" onAction="#FindFile" prefHeight="31.0" prefWidth="120.0" text="Choose..." />
+      <Button layoutX="405.0" layoutY="305.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel" />
+      <Button layoutX="504.0" layoutY="305.0" mnemonicParsing="false" onAction="#Save" text="Save" />
    </children>
 </AnchorPane>

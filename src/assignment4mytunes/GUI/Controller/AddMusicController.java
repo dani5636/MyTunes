@@ -5,21 +5,25 @@
  */
 package assignment4mytunes.GUI.Controller;
 
+import assignment4mytunes.BLL.GenreManager;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
  *
  * @author Mecaa
  */
-public class AddEditController implements Initializable {
+public class AddMusicController implements Initializable {
 
     @FXML
     private TextField txtTitle;
@@ -31,14 +35,13 @@ public class AddEditController implements Initializable {
     private TextField txtPath;
     @FXML
     private ChoiceBox<String> choiceGenre;
-    @FXML
-    private Button btnMore;
-    @FXML
-    private Button btnChoose;
-    @FXML
-    private Button btnCancel;
-    @FXML
-    private Button btnSave;
+    
+    private GenreManager genreManager = new GenreManager();
+    
+
+    public AddMusicController() {
+        
+    }
 
     /**
      * Initializes the controller class.
@@ -46,8 +49,31 @@ public class AddEditController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        choiceGenre.setItems(FXCollections.observableArrayList(
-    "Pop", "Rock", "Techno"));
+        ObservableList<String> genres
+                = FXCollections.observableArrayList(genreManager.loadGenres());
+        choiceGenre.setItems(genres);
+        
     }    
+    
+    @FXML
+    private void AddGenres(ActionEvent event) {
+       
+    }
+    
+   
+
+    @FXML
+    private void FindFile(ActionEvent event) {
+    }
+
+    @FXML
+    private void Cancel(ActionEvent event) {
+    }
+
+    @FXML
+    private void Save(ActionEvent event) {
+    }
+
+    
     
 }
