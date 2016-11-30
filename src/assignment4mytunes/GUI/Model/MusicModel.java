@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class MusicModel {  
     private GenreManager genreManager = new GenreManager();
-    public ArrayList<String> loadGenre()
+    public ArrayList<String> loadGenre() throws IOException
     {
         return (ArrayList<String>) genreManager.loadGenres();
     }

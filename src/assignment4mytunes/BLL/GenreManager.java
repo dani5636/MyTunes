@@ -18,7 +18,7 @@ public class GenreManager {
 
     private final GenreHandler genreHandler = new GenreHandler();
 
-    public ArrayList<String> loadGenres() {
+    public ArrayList<String> loadGenres() throws IOException {
         return (ArrayList<String>) genreHandler.loadGenres();
     }
 

@@ -51,7 +51,12 @@ public class AddGenreController implements Initializable {
     @FXML
     private void addGenre(ActionEvent event) {
         Stage stage = (Stage) txtField.getScene().getWindow();
-        ArrayList<String> genres = musicModel.loadGenre();
+        ArrayList<String> genres = null;
+        try {
+            genres = musicModel.loadGenre();
+        } catch (IOException ex) {
+            Logger.getLogger(AddGenreController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         genres.add(txtField.getText());
         try {
             musicModel.saveGenre(genres);
@@ -59,7 +64,11 @@ public class AddGenreController implements Initializable {
             Logger.getLogger(AddGenreController.class.getName()).log(Level.SEVERE, null, ex);
         }
         isRunning = false;
-        addMusicController.updateGenres();
+        try {
+            addMusicController.updateGenres();
+        } catch (IOException ex) {
+            Logger.getLogger(AddGenreController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         stage.close();
 
     }

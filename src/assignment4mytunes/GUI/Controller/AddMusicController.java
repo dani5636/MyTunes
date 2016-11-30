@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,8 +58,12 @@ public class AddMusicController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        updateGenres();
+        try {
+            // TODO
+            updateGenres();
+        } catch (IOException ex) {
+            Logger.getLogger(AddMusicController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -93,7 +99,7 @@ public class AddMusicController implements Initializable {
     private void Save(ActionEvent event) {
     }
 
-    public void updateGenres() {
+    public void updateGenres() throws IOException {
         ObservableList<String> genres
                 = FXCollections.observableArrayList(musicModel.loadGenre());
         choiceGenre.setItems(genres);

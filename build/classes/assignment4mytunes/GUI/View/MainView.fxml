@@ -5,9 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment4mytunes.GUI.Controller.MainViewController">
+<AnchorPane id="AnchorPane" prefHeight="496.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment4mytunes.GUI.Controller.MainViewController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="250.0">
+      <VBox prefHeight="471.0" prefWidth="228.0">
          <children>
             <HBox alignment="CENTER" prefHeight="58.0" prefWidth="300.0">
                <children>
@@ -27,28 +27,27 @@
             </HBox>
             <VBox alignment="CENTER" prefHeight="40.0" prefWidth="300.0">
                <children>
-                  <Label alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="250.0" text="Playlists:" />
+                  <Label alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="198.0" text="Playlists:" />
                </children>
             </VBox>
             <HBox alignment="CENTER" prefHeight="283.0" prefWidth="300.0">
                <children>
-                  <ListView fx:id="listViewPlaylists" prefHeight="201.0" prefWidth="252.0" />
+                  <ListView fx:id="listViewPlaylists" prefHeight="283.0" prefWidth="199.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="300.0" spacing="10.0">
                <children>
-                  <Button fx:id="btnNewPlaylist" mnemonicParsing="false" text="New..." />
+                  <Button fx:id="btnNewPlaylist" mnemonicParsing="false" onAction="#newPlaylist" text="New..." />
                   <Button fx:id="btnEditPlaylist" mnemonicParsing="false" text="Edit..." />
                   <Button fx:id="btnDeletePlaylist" mnemonicParsing="false" text="Delete" />
                </children>
             </HBox>
-            <VBox prefHeight="48.0" prefWidth="300.0" />
          </children>
          <padding>
             <Insets left="10.0" />
          </padding>
       </VBox>
-      <VBox layoutX="300.0" layoutY="11.0" prefHeight="589.0" prefWidth="217.0">
+      <VBox layoutX="232.0" layoutY="11.0" prefHeight="460.0" prefWidth="285.0">
          <children>
             <HBox alignment="CENTER" prefHeight="94.0" prefWidth="300.0">
                <children>
@@ -57,12 +56,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="300.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="21.0" prefWidth="215.0" text="Songs on playlist:" />
+                  <Label alignment="CENTER" prefHeight="21.0" prefWidth="162.0" text="Songs on playlist:" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="284.0" prefWidth="300.0">
                <children>
-                  <ListView fx:id="listViewSongsOnPlaylist" prefHeight="284.0" prefWidth="200.0" />
+                  <ListView fx:id="listViewSongsOnPlaylist" prefHeight="284.0" prefWidth="248.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="38.0" prefWidth="300.0" spacing="10.0">
@@ -74,9 +73,9 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="605.0" layoutY="73.0" prefHeight="526.0" prefWidth="295.0">
+      <VBox layoutX="581.0" layoutY="73.0" prefHeight="396.0" prefWidth="319.0">
          <children>
-            <HBox prefHeight="35.0" prefWidth="239.0" spacing="5.0">
+            <HBox prefHeight="32.0" prefWidth="309.0" spacing="5.0">
                <children>
                   <Label text="Filter:" />
                   <TextField fx:id="textFieldFilter" prefHeight="31.0" prefWidth="166.0" />
@@ -84,7 +83,7 @@
                </children></HBox>
             <HBox alignment="CENTER" prefHeight="33.0" prefWidth="300.0">
                <children>
-                  <Label prefHeight="31.0" prefWidth="201.0" text="Songs:" />
+                  <Label prefHeight="31.0" prefWidth="264.0" text="Songs:" />
                </children></HBox>
             <HBox alignment="CENTER" prefHeight="286.0" prefWidth="285.0">
                <children>
@@ -93,7 +92,7 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="285.0" spacing="5.0">
                <children>
-                  <Button fx:id="btnNewSong" mnemonicParsing="false" text="New..." />
+                  <Button fx:id="btnNewSong" mnemonicParsing="false" onAction="#newMusic" text="New..." />
                   <Button fx:id="btnEditSong" mnemonicParsing="false" text="Edit..." />
                   <Button fx:id="btnDeleteSong" mnemonicParsing="false" text="Delete" />
                   <Button fx:id="btnCloseProgram" mnemonicParsing="false" text="Close" />
@@ -106,7 +105,7 @@
             <Insets right="10.0" />
          </padding>
       </VBox>
-      <VBox layoutX="552.0" layoutY="147.0" prefHeight="48.0" prefWidth="52.0">
+      <VBox layoutX="517.0" layoutY="145.0" prefHeight="48.0" prefWidth="52.0">
          <children>
             <Button fx:id="btnAddSongsToPlaylist" mnemonicParsing="false" prefHeight="31.0" prefWidth="63.0" text="&lt;---" />
          </children>
