@@ -86,7 +86,7 @@ public class AddMusicController implements Initializable {
     }
 
     @FXML
-    private void Cancel(ActionEvent event) {
+    private void CancelMusic(ActionEvent event) {
     }
 
     @FXML

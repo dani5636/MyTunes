@@ -43,7 +43,7 @@ public class AddGenreController implements Initializable {
     }
 
     @FXML
-    private void Cancel(ActionEvent event) {
+    private void CancelGenre(ActionEvent event) {
         Stage stage = (Stage) txtField.getScene().getWindow();
         stage.close();
     }
