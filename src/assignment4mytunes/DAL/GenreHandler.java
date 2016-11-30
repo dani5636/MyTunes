@@ -21,13 +21,12 @@ import java.util.logging.Logger;
  */
 public class GenreHandler {
 
-    public List<String> loadGenres() {
+    public List<String> loadGenres() throws IOException {
         ArrayList<String> genres = new ArrayList();
 
-        //a try/catch block
         try (BufferedReader CSVFile
                 = new BufferedReader(new FileReader("DATA/genres.txt"))) {
-           
+
             String dataLine = CSVFile.readLine();
             while (dataLine != null) { //process all lines
                 genres.add(dataLine);
@@ -35,15 +34,12 @@ public class GenreHandler {
                 dataLine = CSVFile.readLine();
             }
             return genres;
-
             //read the file
-        } catch (IOException ex) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
     }
 
-    public void saveGenres(List<String> genres) {
+    //saves a txt file contained all the genres
+    public void saveGenres(List<String> genres) throws IOException {
         String csvString = "";
         for (String genre : genres) {
 
@@ -56,8 +52,6 @@ public class GenreHandler {
         )) {
             bw.write(csvString);
 
-        } catch (IOException ex) {
-           Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -6,9 +6,12 @@
 package assignment4mytunes.GUI.Controller;
 
 import assignment4mytunes.GUI.Model.MusicModel;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,7 +53,11 @@ public class AddGenreController implements Initializable {
         Stage stage = (Stage) txtField.getScene().getWindow();
         ArrayList<String> genres = musicModel.loadGenre();
         genres.add(txtField.getText());
-        musicModel.saveGenre(genres);
+        try {
+            musicModel.saveGenre(genres);
+        } catch (IOException ex) {
+            Logger.getLogger(AddGenreController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         isRunning = false;
         addMusicController.updateGenres();
         stage.close();

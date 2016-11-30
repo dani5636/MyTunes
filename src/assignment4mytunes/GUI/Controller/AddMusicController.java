@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -68,8 +69,8 @@ public class AddMusicController implements Initializable {
         Parent root = loader.load();
         Stage subStage = new Stage();
         subStage.setScene(new Scene(root));
-        AddGenreController gController = 
-               loader.getController();
+        AddGenreController gController
+                = loader.getController();
         gController.setAddGenreController(this);
         //set modal window
         subStage.initModality(Modality.WINDOW_MODAL);
@@ -79,6 +80,9 @@ public class AddMusicController implements Initializable {
 
     @FXML
     private void FindFile(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Find your music!");
+        fileChooser.showOpenDialog(null);
     }
 
     @FXML

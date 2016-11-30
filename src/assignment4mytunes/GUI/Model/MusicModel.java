@@ -6,6 +6,7 @@
 package assignment4mytunes.GUI.Model;
 
 import assignment4mytunes.BLL.GenreManager;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class MusicModel {
         return (ArrayList<String>) genreManager.loadGenres();
     }
     
-    public void saveGenre(List<String> genres)
+    public void saveGenre(List<String> genres) throws IOException
     {
         genreManager.saveGenres(genres);
     }
