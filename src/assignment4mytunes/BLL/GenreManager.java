@@ -6,6 +6,7 @@
 package assignment4mytunes.BLL;
 
 import assignment4mytunes.DAL.GenreHandler;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +15,14 @@ import java.util.List;
  * @author Mecaa
  */
 public class GenreManager {
+
     private final GenreHandler genreHandler = new GenreHandler();
-    public ArrayList<String> loadGenres()
-    {
+
+    public ArrayList<String> loadGenres() throws IOException {
         return (ArrayList<String>) genreHandler.loadGenres();
     }
-    public void saveGenres(List<String> genres)
-    {
+
+    public void saveGenres(List<String> genres) throws IOException {
         genreHandler.saveGenres(genres);
     }
 }
