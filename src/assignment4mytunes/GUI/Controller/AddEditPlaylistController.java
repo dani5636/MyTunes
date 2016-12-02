@@ -5,6 +5,7 @@
  */
 package assignment4mytunes.GUI.Controller;
 
+import assignment4mytunes.BE.Playlist;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -26,6 +27,26 @@ public class AddEditPlaylistController implements Initializable
     private Button btnCancel;
     @FXML
     private Button btnSave;
+    private Playlist playlist;
+    
+
+    
+    public AddEditPlaylistController(Playlist playlist)
+      {
+        this.playlist = playlist;
+      }
+
+    public Playlist getPlaylist()
+      {
+        return playlist;
+      }
+
+    public AddEditPlaylistController()
+      {
+        
+      }
+    
+    
 
     /**
      * Initializes the controller class.
