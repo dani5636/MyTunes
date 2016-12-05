@@ -6,8 +6,10 @@
 package assignment4mytunes.GUI.Controller;
 
 import assignment4mytunes.BE.Playlist;
+import assignment4mytunes.BLL.PlaylistManager;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,7 +20,7 @@ import javafx.scene.control.TextField;
  *
  * @author gudla
  */
-public class AddEditPlaylistController implements Initializable
+public class AddPlaylistController implements Initializable
 {
 
     @FXML
@@ -28,10 +30,10 @@ public class AddEditPlaylistController implements Initializable
     @FXML
     private Button btnSave;
     private Playlist playlist;
-    
+    private PlaylistManager pManager = new PlaylistManager();
 
     
-    public AddEditPlaylistController(Playlist playlist)
+    public AddPlaylistController(Playlist playlist)
       {
         this.playlist = playlist;
       }
@@ -41,7 +43,7 @@ public class AddEditPlaylistController implements Initializable
         return playlist;
       }
 
-    public AddEditPlaylistController()
+    public AddPlaylistController()
       {
         
       }
@@ -56,5 +58,11 @@ public class AddEditPlaylistController implements Initializable
       {
         // TODO
       }    
+
+    @FXML
+    private void clickSave(ActionEvent event)
+      {
+        pManager.newPlaylist(new Playlist(txtName.getText()));
+      }
     
 }
