@@ -6,6 +6,7 @@
 package assignment4mytunes.GUI.Controller;
 
 import assignment4mytunes.GUI.Model.MusicModel;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -88,11 +89,18 @@ public class AddMusicController implements Initializable {
     private void FindFile(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Find your music!");
-        fileChooser.showOpenDialog(null);
+        File file = fileChooser.showOpenDialog(null);
+        if(file != null){
+            txtTitle.setText(file.getName());
+            txtPath.setText(file.getAbsolutePath());
+           
+        }
     }
 
     @FXML
     private void CancelMusic(ActionEvent event) {
+        Stage stage = (Stage) txtPath.getScene().getWindow();
+         stage.close();
     }
 
     @FXML
@@ -104,5 +112,5 @@ public class AddMusicController implements Initializable {
                 = FXCollections.observableArrayList(musicModel.loadGenre());
         choiceGenre.setItems(genres);
     }
-
+    
 }

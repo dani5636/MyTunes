@@ -30,7 +30,7 @@ public class AddGenreController implements Initializable {
     private MusicModel musicModel = new MusicModel();
     private boolean isRunning;
     private AddMusicController addMusicController;
-
+    
     
     
     /**
@@ -64,6 +64,11 @@ public class AddGenreController implements Initializable {
             Logger.getLogger(AddGenreController.class.getName()).log(Level.SEVERE, null, ex);
         }
         isRunning = false;
+        try {
+            addMusicController.updateGenres();
+        } catch (IOException ex) {
+            Logger.getLogger(AddGenreController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             addMusicController.updateGenres();
         } catch (IOException ex) {
