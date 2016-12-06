@@ -14,10 +14,11 @@ import assignment4mytunes.DAL.PlaylistHandler;
  */
 public class PlaylistManager
 {
-    private PlaylistHandler pHandler = new PlaylistHandler();
+    private PlaylistHandler pHandler;
 
     public void newPlaylist(Playlist playlist)
       {
+        pHandler = new PlaylistHandler();
         pHandler.savePlaylist(playlist);
       }
     

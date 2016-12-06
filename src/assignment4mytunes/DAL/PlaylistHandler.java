@@ -7,14 +7,24 @@ package assignment4mytunes.DAL;
 
 import assignment4mytunes.BE.Playlist;
 
+
 /**
  *
  * @author gudla
  */
 public class PlaylistHandler
 {
+    private String fileName;
+    public PlaylistHandler()
+      {
+      }
+    
+    
+    
     public void savePlaylist(Playlist p)
       {
+        p.getName();
+        fileName = p.getName() + ".pll";
         throw new UnsupportedOperationException("Daniel is a ginger");
       }
     
