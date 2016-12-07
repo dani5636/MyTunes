@@ -7,19 +7,22 @@ package assignment4mytunes.BLL;
 
 import assignment4mytunes.BE.Playlist;
 import assignment4mytunes.DAL.PlaylistHandler;
+import java.util.ArrayList;
 
 /**
  *
  * @author gudla
  */
-public class PlaylistManager
-{
+public class PlaylistManager {
+
     private PlaylistHandler pHandler = new PlaylistHandler();
 
-    public void newPlaylist(Playlist playlist)
-      {
+    public void newPlaylist(Playlist playlist) {
         pHandler.savePlaylist(playlist);
-      }
-    
-    
+    }
+
+    public ArrayList<Playlist> loadAllPlaylists() {
+        return pHandler.loadPlaylist();
+    }
+
 }

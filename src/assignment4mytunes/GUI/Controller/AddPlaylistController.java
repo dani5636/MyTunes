@@ -7,6 +7,7 @@ package assignment4mytunes.GUI.Controller;
 
 import assignment4mytunes.BE.Playlist;
 import assignment4mytunes.BLL.PlaylistManager;
+import assignment4mytunes.GUI.Model.MusicModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -20,9 +21,8 @@ import javafx.scene.control.TextField;
  *
  * @author gudla
  */
-public class AddPlaylistController implements Initializable
-{
-
+public class AddPlaylistController implements Initializable {
+    
     @FXML
     private TextField txtName;
     @FXML
@@ -30,39 +30,33 @@ public class AddPlaylistController implements Initializable
     @FXML
     private Button btnSave;
     private Playlist playlist;
-    private PlaylistManager pManager = new PlaylistManager();
-
+    private MusicModel musicModel;
     
-    public AddPlaylistController(Playlist playlist)
-      {
+    public AddPlaylistController(Playlist playlist) {
         this.playlist = playlist;
-      }
-
-    public Playlist getPlaylist()
-      {
+    }
+    
+    public Playlist getPlaylist() {
         return playlist;
-      }
-
-    public AddPlaylistController()
-      {
+    }
+    
+    public AddPlaylistController() {
         
-      }
-    
-    
+    }
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-      {
+    public void initialize(URL url, ResourceBundle rb) {
         // TODO
-      }    
-
+    }    
+    
     @FXML
-    private void clickSave(ActionEvent event)
-      {
-        pManager.newPlaylist(new Playlist(txtName.getText()));
-      }
+    private void clickSave(ActionEvent event) {
+        musicModel = MusicModel.getMusicModel();
+        musicModel.newPlaylist(txtName.getText());
+        
+    }
     
 }

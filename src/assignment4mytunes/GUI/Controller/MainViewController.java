@@ -95,7 +95,7 @@ public class MainViewController implements Initializable {
     {
         try   
         {
-            windowloader("/assignment4mytunes/GUI/View/AddEditPlaylist.fxml");
+            windowloader("/assignment4mytunes/GUI/View/AddPlaylist.fxml");
         } catch (IOException ex)
         {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -106,7 +106,6 @@ public class MainViewController implements Initializable {
      Stage primaryStage = (Stage)btnNewSong.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(p));
         Parent root = loader.load();
-                
         Stage subStage = new Stage();
         subStage.setScene(new Scene(root));
         
