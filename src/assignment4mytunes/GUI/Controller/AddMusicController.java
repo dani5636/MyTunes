@@ -6,6 +6,7 @@
 package assignment4mytunes.GUI.Controller;
 
 import assignment4mytunes.GUI.Model.MusicModel;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -44,7 +45,6 @@ public class AddMusicController implements Initializable {
     private TextField txtPath;
     @FXML
     private ChoiceBox<String> choiceGenre;
-    private MusicModel musicModel = new MusicModel();
 
     @FXML
     private Button btnGenre;
@@ -58,12 +58,7 @@ public class AddMusicController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            // TODO
-            updateGenres();
-        } catch (IOException ex) {
-            Logger.getLogger(AddMusicController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        updateGenres();
 
     }
 
@@ -88,20 +83,32 @@ public class AddMusicController implements Initializable {
     private void FindFile(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Find your music!");
-        fileChooser.showOpenDialog(null);
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            txtTitle.setText(file.getName());
+            txtPath.setText(file.getAbsolutePath());
+
+        }
     }
 
     @FXML
     private void CancelMusic(ActionEvent event) {
+        Stage stage = (Stage) txtPath.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     private void Save(ActionEvent event) {
     }
 
-    public void updateGenres() throws IOException {
-        ObservableList<String> genres
-                = FXCollections.observableArrayList(musicModel.loadGenre());
+    public void updateGenres() {
+        MusicModel musicModel = MusicModel.getMusicModel();
+        ObservableList<String> genres = null;
+        try {
+            genres = FXCollections.observableArrayList(musicModel.loadGenre());
+        } catch (IOException ex) {
+            Logger.getLogger(AddMusicController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         choiceGenre.setItems(genres);
     }
 

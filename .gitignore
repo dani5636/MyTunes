@@ -81,3 +81,12 @@ $RECYCLE.BIN/
 build/built-jar.properties
 dist/Assignment4MyTunes.html
 dist/Assignment4MyTunes.html
+*.properties
+dist/Assignment4MyTunes.jnlp
+*.html
+dist/web-files/dtjava.js
+build/built-jar.properties
+Assignment4MyTunesUML.vpp~1
+nbproject/private/private.xml
+*.html
+build/built-jar.properties

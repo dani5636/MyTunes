@@ -27,12 +27,10 @@ public class AddGenreController implements Initializable {
 
     @FXML
     private TextField txtField;
-    private MusicModel musicModel = new MusicModel();
     private boolean isRunning;
     private AddMusicController addMusicController;
+    private MusicModel musicModel = null;
 
-    
-    
     /**
      * Initializes the controller class.
      */
@@ -64,11 +62,7 @@ public class AddGenreController implements Initializable {
             Logger.getLogger(AddGenreController.class.getName()).log(Level.SEVERE, null, ex);
         }
         isRunning = false;
-        try {
-            addMusicController.updateGenres();
-        } catch (IOException ex) {
-            Logger.getLogger(AddGenreController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        addMusicController.updateGenres();
         stage.close();
 
     }
@@ -76,7 +70,5 @@ public class AddGenreController implements Initializable {
     public void setAddGenreController(AddMusicController addMusicController) {
         this.addMusicController = addMusicController;
     }
-
-   
 
 }
