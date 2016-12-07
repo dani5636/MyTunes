@@ -15,32 +15,18 @@ import java.util.ArrayList;
 public class PlaylistHandler {
 
     private String fileName;
-<<<<<<< HEAD
-    public PlaylistHandler()
-      {
-        
-      }
-    
-    
-    
-    public void savePlaylist(Playlist p)
-      {
-        p.getName();
-        fileName = p.getName() + ".pll";
-        throw new UnsupportedOperationException("Daniel is a ginger");
-      }
-    
-=======
 
     public PlaylistHandler() {
+
     }
 
     public void savePlaylist(Playlist p) {
-        throw new UnsupportedOperationException("Gudlaug should drown herself in a puddle of water");
+        p.getName();
+        fileName = p.getName() + ".pll";
+        throw new UnsupportedOperationException("Daniel is a ginger");
     }
 
     public ArrayList<Playlist> loadPlaylist() {
         throw new UnsupportedOperationException("Gudlaug should drown herself in a puddle of water");
     }
->>>>>>> origin/master
 }

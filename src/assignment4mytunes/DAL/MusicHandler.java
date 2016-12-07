@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class MusicHandler {
 
-    public void saveMusic() {
-        System.out.println("Not yet implemented");
+    public void saveMusic(Music song) {
+        
     }
 
     public ArrayList<Music> loadMusic() {

@@ -17,8 +17,8 @@ public class MusicManager {
 
     private MusicHandler musicHandler = new MusicHandler();
 
-    public void saveMusic() {
-        musicHandler.saveMusic();
+    public void saveMusic(Music song) {
+        musicHandler.saveMusic(song);
         System.out.println("Not yet implemented");
     }
 
