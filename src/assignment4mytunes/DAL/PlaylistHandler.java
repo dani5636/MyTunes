@@ -14,6 +14,11 @@ import java.util.ArrayList;
  */
 public class PlaylistHandler {
 
+    private String fileName;
+
+    public PlaylistHandler() {
+    }
+
     public void savePlaylist(Playlist p) {
         throw new UnsupportedOperationException("Gudlaug should drown herself in a puddle of water");
     }
@@ -21,5 +26,4 @@ public class PlaylistHandler {
     public ArrayList<Playlist> loadPlaylist() {
         throw new UnsupportedOperationException("Gudlaug should drown herself in a puddle of water");
     }
-
 }
