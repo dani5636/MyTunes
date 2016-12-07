@@ -5,11 +5,14 @@
  */
 package assignment4mytunes.GUI.Controller;
 
+import assignment4mytunes.BE.Music;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +23,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.stage.Modality;
@@ -48,8 +54,6 @@ public class MainViewController implements Initializable {
     @FXML
     private Label lblCurrentSong;
     @FXML
-    private ListView<?> listViewSongsOnPlaylist;
-    @FXML
     private Button btnMoveUpSong;
     @FXML
     private Button btnMoveDownSong;
@@ -60,8 +64,6 @@ public class MainViewController implements Initializable {
     @FXML
     private Button btnFilterSearch;
     @FXML
-    private ListView<?> listViewAllSongs;
-    @FXML
     private Button btnNewSong;
     @FXML
     private Button btnEditSong;
@@ -69,11 +71,28 @@ public class MainViewController implements Initializable {
     private Button btnCloseProgram;
     @FXML
     private Button btnAddSongsToPlaylist;
+    @FXML
+    private TableView<?> tableViewSongsOnPlaylist;
+    @FXML
+    private TableColumn<?, ?> tableViewSongsOnPlaylistArtist;
+    @FXML
+    private TableColumn<?, ?> tableViewSongsOnPlaylistSongName;
+    @FXML
+    private TableView<Music> tableViewAllSongs;
+    @FXML
+    private TableColumn<Music, String> tableViewAllSongsArtist;
+    @FXML
+    private TableColumn<Music, String> tableViewAllSongsSongName;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // TOD
+   ObservableList<String> songs = FXCollections.observableArrayList(
+    "acdc",
+    "Justin Bieber"
+    );
+    
     }    
     
     
@@ -114,5 +133,7 @@ public class MainViewController implements Initializable {
         
         subStage.show();
     }
+    
+    
     
 }
