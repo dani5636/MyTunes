@@ -61,7 +61,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="284.0" prefWidth="300.0">
                <children>
-                  <ListView fx:id="listViewSongsOnPlaylist" prefHeight="284.0" prefWidth="248.0" />
+                  <TableView fx:id="tableViewSongsOnPlaylist" prefHeight="284.0" prefWidth="256.0">
+                    <columns>
+                      <TableColumn fx:id="tableViewSongsOnPlaylistArtist" prefWidth="128.0" text="Artist:" />
+                      <TableColumn fx:id="tableViewSongsOnPlaylistSongName" prefWidth="127.0" text="Song Name:" />
+                    </columns>
+                  </TableView>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="38.0" prefWidth="300.0" spacing="10.0">
@@ -87,10 +92,15 @@
                </children></HBox>
             <HBox alignment="CENTER" prefHeight="286.0" prefWidth="285.0">
                <children>
-                  <ListView fx:id="listViewAllSongs" prefHeight="286.0" prefWidth="265.0" />
+                  <TableView fx:id="tableViewAllSongs" prefHeight="286.0" prefWidth="292.0">
+                    <columns>
+                      <TableColumn fx:id="tableViewAllSongsArtist" prefWidth="148.0" text="Artist:" />
+                      <TableColumn fx:id="tableViewAllSongsSongName" prefWidth="146.0" text="Song Name:" />
+                    </columns>
+                  </TableView>
                </children>
             </HBox>
-            <HBox prefHeight="40.0" prefWidth="285.0" spacing="5.0">
+            <HBox prefHeight="40.0" prefWidth="294.0" spacing="5.0">
                <children>
                   <Button fx:id="btnNewSong" mnemonicParsing="false" onAction="#newMusic" text="New..." />
                   <Button fx:id="btnEditSong" mnemonicParsing="false" text="Edit..." />
