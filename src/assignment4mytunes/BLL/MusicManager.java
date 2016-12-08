@@ -22,7 +22,7 @@ public class MusicManager {
         System.out.println("Not yet implemented");
     }
 
-    public ArrayList<Music> loadMusic() {
-        return musicHandler.loadMusic();
+    public ArrayList<Music> loadAllMusic() {
+        return musicHandler.loadAllMusic();
     }
 }
