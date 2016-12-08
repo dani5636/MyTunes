@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Playlist
 {
     private String name;
-    private ArrayList<Music> playlist;
+    private ArrayList<Music> playlist = null;
 
     public Playlist(String name)
       {
