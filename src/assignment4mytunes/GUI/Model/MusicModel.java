@@ -19,37 +19,37 @@ import java.util.List;
  * @author Mecaa
  */
 public final class MusicModel {
-    
+
     private static final MusicModel musicModel = new MusicModel();
     private GenreManager genreManager = new GenreManager();
     private PlaylistManager pManager = new PlaylistManager();
     private MusicManager musicManager = new MusicManager();
-    
+
     private MusicModel() {
-        
+
     }
-    
+
     public static MusicModel getMusicModel() {
         return musicModel;
     }
-    
+
     public ArrayList<String> loadGenre() throws IOException {
         return (ArrayList<String>) genreManager.loadGenres();
     }
-    
+
     public void saveGenre(List<String> genres) throws IOException {
         genreManager.saveGenres(genres);
     }
-    
+
     public void saveSongs(Music song) {
         musicManager.saveMusic(song);
     }
-    
-    public ArrayList<Music> loadSongs() {
-        System.out.println("loading songs not implemented!");
+
+    public ArrayList<Music> loadAllSongs() {
+        musicManager.loadAllMusic();
         return null;
     }
-    
+
     public void newPlaylist(String name) {
         pManager.newPlaylist(new Playlist(name));
     }

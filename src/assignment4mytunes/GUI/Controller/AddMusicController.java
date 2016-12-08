@@ -95,6 +95,8 @@ public class AddMusicController implements Initializable {
     private void CancelMusic(ActionEvent event) {
         Stage stage = (Stage) txtPath.getScene().getWindow();
         stage.close();
+        MusicModel musicModel = MusicModel.getMusicModel();
+        musicModel.loadAllSongs();
     }
 
     @FXML
