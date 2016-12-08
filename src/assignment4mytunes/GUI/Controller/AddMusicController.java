@@ -86,7 +86,7 @@ public class AddMusicController implements Initializable {
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
             txtTitle.setText(file.getName());
-            txtPath.setText(file.getAbsolutePath());
+            txtPath.setText(file.getPath());
 
         }
     }
@@ -101,6 +101,7 @@ public class AddMusicController implements Initializable {
 
     @FXML
     private void Save(ActionEvent event) {
+        
     }
 
     public void updateGenres() {

@@ -3,16 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/gudla/OneDrive/Documents/GitHub/MyTunes/src/assignment4mytunes/BLL/PlaylistManager.java</file>
-            <file>file:/C:/Users/gudla/OneDrive/Documents/GitHub/MyTunes/src/assignment4mytunes/BE/Playlist.java</file>
-            <file>file:/C:/Users/gudla/OneDrive/Documents/GitHub/MyTunes/src/assignment4mytunes/GUI/Model/MusicModel.java</file>
-            <file>file:/C:/Users/gudla/OneDrive/Documents/GitHub/MyTunes/src/assignment4mytunes/GUI/Controller/AddPlaylistController.java</file>
-            <file>file:/C:/Users/gudla/OneDrive/Documents/GitHub/MyTunes/src/assignment4mytunes/DAL/PlaylistHandler.java</file>
-=======
-            <file>file:/C:/Users/werwe/Documents/GitHub/MyTunes/src/assignment4mytunes/GUI/Controller/MainViewController.java</file>
-            <file>file:/C:/Users/werwe/Documents/GitHub/MyTunes/src/assignment4mytunes/app.java</file>
->>>>>>> origin/master
+            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/BLL/MusicManager.java</file>
+            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/GUI/Model/MusicModel.java</file>
+            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/BLL/GenreManager.java</file>
+            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/DAL/PlaylistHandler.java</file>
+            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/GUI/Controller/AddMusicController.java</file>
+            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/DAL/GenreHandler.java</file>
+            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/DAL/MusicHandler.java</file>
         </group>
     </open-files>
 </project-private>
