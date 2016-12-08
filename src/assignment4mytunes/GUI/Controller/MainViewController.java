@@ -6,6 +6,8 @@
 package assignment4mytunes.GUI.Controller;
 
 import assignment4mytunes.BE.Music;
+import assignment4mytunes.BE.Playlist;
+import assignment4mytunes.GUI.Model.MusicModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,7 +46,7 @@ public class MainViewController implements Initializable {
     @FXML
     private Slider sliderVolume;
     @FXML
-    private ListView<?> listViewPlaylists;
+    private ListView<Playlist> listViewPlaylists;
     @FXML
     private Button btnNewPlaylist;
     @FXML
@@ -83,6 +85,7 @@ public class MainViewController implements Initializable {
     private TableColumn<Music, String> tableViewAllSongsArtist;
     @FXML
     private TableColumn<Music, String> tableViewAllSongsSongName;
+    
     
     
     @Override
@@ -134,6 +137,16 @@ public class MainViewController implements Initializable {
         subStage.show();
     }
     
+    
+    private void loadTextFileIntoView()
+      {
+        MusicModel musicModel = MusicModel.getMusicModel();
+        ObservableList<Playlist> plList = 
+                FXCollections.observableArrayList( musicModel.getAllPlaylists());
+        
+        listViewPlaylists.setItems(plList);
+        
+      }
     
     
 }

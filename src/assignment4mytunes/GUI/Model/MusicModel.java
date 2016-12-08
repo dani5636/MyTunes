@@ -53,4 +53,9 @@ public final class MusicModel {
     public void newPlaylist(String name) {
         pManager.newPlaylist(new Playlist(name));
     }
+    
+    public ArrayList<Playlist> getAllPlaylists()
+      {
+        return pManager.loadAllPlaylists();
+      }
 }
