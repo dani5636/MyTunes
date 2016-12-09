@@ -34,6 +34,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
 import javafx.stage.Modality;
@@ -43,8 +44,6 @@ public class MainViewController implements Initializable {
 
     @FXML
     private Button btnPrevSong;
-    @FXML
-    private Button btnNextSong;
     @FXML
     private Slider sliderVolume;
     @FXML
@@ -72,13 +71,11 @@ public class MainViewController implements Initializable {
     @FXML
     private Button btnCloseProgram;
     @FXML
-    private Button btnAddSongsToPlaylist;
+    private TableView<Music> tblSongsOnPlaylist;
     @FXML
-    private TableView<Playlist> tblSongsOnPlaylist;
+    private TableColumn<Music, String> tblSongsOnPlaylistArtist;
     @FXML
-    private TableColumn<?, ?> tblSongsOnPlaylistArtist;
-    @FXML
-    private TableColumn<?, ?> tblSongsOnPlaylistSongName;
+    private TableColumn<Music, String> tblSongsOnPlaylistSongName;
     @FXML
     private TableView<Music> tblAllSongs;
     @FXML
@@ -186,15 +183,48 @@ public class MainViewController implements Initializable {
     private Music selectedSong() {
         return tblAllSongs.getSelectionModel().getSelectedItem();
     }
-    
-    private void selectedItemFromList()
-      {
+
+    private void selectedItemFromList() {
         tblPlaylist.getSelectionModel().getSelectedItem();
-        
+
         tblAllSongs.getSelectionModel().getSelectedItem();
-        
+
         tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
-        
-        
-      }
+
+    }
+
+    @FXML
+    private void AddSongToPlaylist(ActionEvent event) {
+        Playlist p = null;
+        p = tblPlaylist.getSelectionModel().getSelectedItem();
+        Music m = null;
+        m = tblAllSongs.getSelectionModel().getSelectedItem();
+        if (m != null && p != null) {
+            p.addSong(m);
+            updateSongsPlaylist();
+            MusicModel musicModel = MusicModel.getMusicModel();
+            musicModel.savePlaylist(p);
+        }
+    }
+
+    private void updateSongsPlaylist() {
+        Playlist p = null;
+        p = tblPlaylist.getSelectionModel().getSelectedItem();
+        if (p != null) {
+            ObservableList<Music> plSongList
+                    = FXCollections.observableArrayList(p.getPlaylist());
+            tblSongsOnPlaylist.setItems(plSongList);
+            tblSongsOnPlaylistSongName.setCellValueFactory(
+                    new PropertyValueFactory("title"));
+            tblSongsOnPlaylistArtist.setCellValueFactory(
+                    new PropertyValueFactory("artist"));
+        }
+
+    }
+
+    @FXML
+    private void songsInPlaylist(MouseEvent event) {
+        updateSongsPlaylist();
+
+    }
 }

@@ -104,6 +104,7 @@ public class PlaylistHandler {
                         String time = splitData[4];
                         Music music = new Music(title, artist, genre, path, time);
                         playlist.addSong(music);
+                        dataLine = plFile.readLine();
                     }
 
                     playlists.add(playlist);

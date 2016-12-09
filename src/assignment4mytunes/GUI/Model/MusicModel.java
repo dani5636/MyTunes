@@ -57,4 +57,9 @@ public final class MusicModel {
     public ArrayList<Playlist> loadAllPlaylists() throws IOException {
         return pManager.loadAllPlaylists();
     }
+
+    public void savePlaylist(Playlist p) {
+        pManager.newPlaylist(p);
+        System.out.println("Trying to save");
+    }
 }
