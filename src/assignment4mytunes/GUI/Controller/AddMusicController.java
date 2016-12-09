@@ -103,7 +103,6 @@ public class AddMusicController implements Initializable {
     private void CancelMusic(ActionEvent event) {
         Stage stage = (Stage) txtPath.getScene().getWindow();
         stage.close();
-        MusicModel musicModel = MusicModel.getMusicModel();
     }
 
     @FXML
@@ -112,6 +111,7 @@ public class AddMusicController implements Initializable {
 
             try {
                 getTextAndAddSong();
+
             } catch (IOException ex) {
 
             }
@@ -159,6 +159,8 @@ public class AddMusicController implements Initializable {
         MusicModel musicModel = MusicModel.getMusicModel();
         Music song = new Music(name, artist, genre, path, duration);
         musicModel.saveSongs(song);
+        MainViewController mainView = musicModel.getMainView();
+        mainView.updater();
         /*
         UpdateListModel uList = UpdateListModel.getUpdateList();
         uList.updateMainList();  */

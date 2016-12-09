@@ -89,7 +89,6 @@ public class PlaylistHandler {
         try (DirectoryStream<Path> stream
                 = Files.newDirectoryStream(dir, "*.pll")) {
             for (Path entry : stream) {
-                System.out.println(entry.getFileName());
                 try (BufferedReader plFile
                         = new BufferedReader(new FileReader("DATA/Playlist/" + entry.getFileName()))) {
                     String dataLine = plFile.readLine();

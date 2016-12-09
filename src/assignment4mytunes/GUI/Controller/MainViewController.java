@@ -124,14 +124,15 @@ public class MainViewController implements Initializable {
         Parent root = loader.load();
         Stage subStage = new Stage();
         subStage.setScene(new Scene(root));
-
+        MusicModel musicModel = MusicModel.getMusicModel();
+        musicModel.setMainView(this);
         subStage.initModality(Modality.WINDOW_MODAL);
         subStage.initOwner(primaryStage);
 
         subStage.show();
     }
 
-    private void updater() {
+    public void updater() {
         MusicModel musicModel = MusicModel.getMusicModel();
 
         try {
@@ -143,6 +144,7 @@ public class MainViewController implements Initializable {
                         new PropertyValueFactory("title"));
                 tblAllSongsArtist.setCellValueFactory(
                         new PropertyValueFactory("artist"));
+                updateSongsPlaylist();
             }
             if (!musicModel.loadAllPlaylists().isEmpty()) {
                 ObservableList<Playlist> pList
