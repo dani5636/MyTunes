@@ -7,7 +7,9 @@ package assignment4mytunes.GUI.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -16,6 +18,9 @@ import javafx.fxml.Initializable;
  */
 public class DeleteViewController implements Initializable
 {
+
+    @FXML
+    private Label lblSelected;
 
     /**
      * Initializes the controller class.
