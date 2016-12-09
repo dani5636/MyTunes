@@ -5,11 +5,13 @@
         <group>
             <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/BLL/MusicManager.java</file>
             <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/GUI/Model/MusicModel.java</file>
-            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/BLL/GenreManager.java</file>
             <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/DAL/PlaylistHandler.java</file>
             <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/GUI/Controller/AddMusicController.java</file>
-            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/DAL/GenreHandler.java</file>
+            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/GUI/Controller/MainViewController.java</file>
+            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/BE/Music.java</file>
+            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/app.java</file>
             <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/src/assignment4mytunes/DAL/MusicHandler.java</file>
+            <file>file:/C:/Users/Mecaa/Desktop/School/NetBeans/Assignment4MyTunes/nbproject/build-impl.xml</file>
         </group>
     </open-files>
 </project-private>

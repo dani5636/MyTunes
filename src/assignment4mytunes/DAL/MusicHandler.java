@@ -6,8 +6,10 @@
 package assignment4mytunes.DAL;
 
 import assignment4mytunes.BE.Music;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -15,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,7 +30,7 @@ public class MusicHandler {
     public void saveMusic(Music song) {
         String mscString = "";
         String fileName = song.getTitle() + ".sng";
-        File file = new File("DATA/Playlist/" + fileName);
+        File file = new File("DATA/Songs/" + fileName);
         System.out.println(file.getAbsolutePath());
         if (!file.exists()) {
             try {
@@ -43,10 +46,13 @@ public class MusicHandler {
                 + ","
                 + song.getGenre()
                 + ","
-                + song.getPath();
+                + song.getPath()
+                + ","
+                + song.getTime();
 
         try (BufferedWriter bw = new BufferedWriter(
-                new FileWriter(fileName)
+                new FileWriter("DATA/Songs/" + fileName
+                )
         )) {
             bw.write(mscString);
 
@@ -55,20 +61,32 @@ public class MusicHandler {
         }
     }
 
-    public ArrayList<Music> loadAllMusic() {
-        ArrayList<Music> songs = null;
-        Path dir = Paths.get("DATA/Songs");
+    public List<Music> loadAllMusic() throws IOException {
+        List<Music> allSongs = new ArrayList<>();
+        Path dir = Paths.get("DATA/Songs/");
         try (DirectoryStream<Path> stream
-                = Files.newDirectoryStream(dir, "*.song")) {
+                = Files.newDirectoryStream(dir, "*.sng")) {
             for (Path entry : stream) {
-                System.out.println(entry.getFileName());
+                try (BufferedReader CSVFile
+                        = new BufferedReader(new FileReader("DATA/Songs/" + entry.getFileName()))) {
+                    String dataLine = CSVFile.readLine();
+                    String[] splitData = dataLine.split(",");
+
+                    String title = splitData[0];
+                    String artist = splitData[1];
+                    String genre = splitData[2];
+                    String path = splitData[3];
+                    String time = splitData[4];
+
+                    Music music = new Music(title, artist, genre, path, time);
+                    allSongs.add(music);
+
+                }
+
             }
-            return songs;
-        } catch (IOException x) {
-            // IOException can never be thrown by the iteration.
-            // In this snippet, it can // only be thrown by newDirectoryStream.
-            System.err.println(x);
+
         }
-        return songs;
+        return allSongs;
     }
+
 }

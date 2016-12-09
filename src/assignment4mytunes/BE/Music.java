@@ -12,9 +12,9 @@ package assignment4mytunes.BE;
 public class Music {
 
     private String path, genre, artist, title;
-    private int time;
+    private String time;
 
-    public Music(String path, String genre, String artist, String title, int time) {
+    public Music(String title, String artist, String genre, String path, String time) {
         this.path = path;
         this.genre = genre;
         this.artist = artist;
@@ -22,7 +22,11 @@ public class Music {
         this.title = title;
     }
 
-    public int getTime() {
+    /**
+     *
+     * @return
+     */
+    public String getTime() {
         return time;
     }
 
@@ -54,7 +58,7 @@ public class Music {
         this.artist = artist;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

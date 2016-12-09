@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="496.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment4mytunes.GUI.Controller.MainViewController">
+<AnchorPane id="AnchorPane" prefHeight="496.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment4mytunes.GUI.Controller.MainViewController">
    <children>
       <VBox prefHeight="471.0" prefWidth="228.0">
          <children>
@@ -13,9 +20,9 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="82.0" prefWidth="203.0" spacing="15.0">
                      <children>
-                        <Button fx:id="btnPrevSong" mnemonicParsing="false" text="Prev." />
-                        <ToggleButton fx:id="btnPlaySong" mnemonicParsing="false" text="Play" />
-                        <Button fx:id="btnNextSong" mnemonicParsing="false" text="Next" />
+                        <Button fx:id="btnPrevSong" mnemonicParsing="false" onAction="#prev" text="Prev." />
+                        <ToggleButton mnemonicParsing="false" onAction="#play" text="Play" />
+                        <Button mnemonicParsing="false" onAction="#next" text="Next" />
                      </children>
                   </HBox>
                </children>
@@ -32,14 +39,19 @@
             </VBox>
             <HBox alignment="CENTER" prefHeight="283.0" prefWidth="300.0">
                <children>
-                  <ListView fx:id="listViewPlaylists" prefHeight="283.0" prefWidth="199.0" />
+                  <TableView fx:id="tblPlaylist" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="clmPlaylist" prefWidth="130.0" text="C1" />
+                      <TableColumn fx:id="clmTime" prefWidth="69.0" text="C2" />
+                    </columns>
+                  </TableView>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="300.0" spacing="10.0">
                <children>
                   <Button fx:id="btnNewPlaylist" mnemonicParsing="false" onAction="#newPlaylist" text="New..." />
                   <Button fx:id="btnEditPlaylist" mnemonicParsing="false" text="Edit..." />
-                  <Button fx:id="btnDeletePlaylist" mnemonicParsing="false" text="Delete" />
+                  <Button fx:id="btnDeletePlaylist" mnemonicParsing="false" onAction="#delete" text="Delete" />
                </children>
             </HBox>
          </children>
@@ -61,10 +73,10 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="284.0" prefWidth="300.0">
                <children>
-                  <TableView fx:id="tableViewSongsOnPlaylist" prefHeight="284.0" prefWidth="256.0">
+                  <TableView fx:id="tblSongsOnPlaylist" prefHeight="284.0" prefWidth="256.0">
                     <columns>
-                      <TableColumn fx:id="tableViewSongsOnPlaylistArtist" prefWidth="128.0" text="Artist:" />
-                      <TableColumn fx:id="tableViewSongsOnPlaylistSongName" prefWidth="127.0" text="Song Name:" />
+                      <TableColumn fx:id="tblSongsOnPlaylistArtist" prefWidth="128.0" text="Artist:" />
+                      <TableColumn fx:id="tblSongsOnPlaylistSongName" prefWidth="127.0" text="Song Name:" />
                     </columns>
                   </TableView>
                </children>
@@ -73,7 +85,7 @@
                <children>
                   <Button fx:id="btnMoveUpSong" mnemonicParsing="false" text="^" />
                   <Button fx:id="btnMoveDownSong" mnemonicParsing="false" text="v" />
-                  <Button fx:id="btnDeleteSong" mnemonicParsing="false" text="Delete" />
+                  <Button fx:id="btnDeleteSong" mnemonicParsing="false" onAction="#delete" text="Delete" />
                </children>
             </HBox>
          </children>
@@ -92,10 +104,10 @@
                </children></HBox>
             <HBox alignment="CENTER" prefHeight="286.0" prefWidth="285.0">
                <children>
-                  <TableView fx:id="tableViewAllSongs" prefHeight="286.0" prefWidth="292.0">
+                  <TableView fx:id="tblAllSongs" prefHeight="286.0" prefWidth="292.0">
                     <columns>
-                      <TableColumn fx:id="tableViewAllSongsArtist" prefWidth="148.0" text="Artist:" />
-                      <TableColumn fx:id="tableViewAllSongsSongName" prefWidth="146.0" text="Song Name:" />
+                      <TableColumn fx:id="tblAllSongsArtist" prefWidth="148.0" text="Artist:" />
+                      <TableColumn fx:id="tblAllSongsName" prefWidth="146.0" text="Song Name:" />
                     </columns>
                   </TableView>
                </children>
@@ -104,7 +116,7 @@
                <children>
                   <Button fx:id="btnNewSong" mnemonicParsing="false" onAction="#newMusic" text="New..." />
                   <Button fx:id="btnEditSong" mnemonicParsing="false" text="Edit..." />
-                  <Button fx:id="btnDeleteSong" mnemonicParsing="false" text="Delete" />
+                  <Button fx:id="btnDeleteSong" mnemonicParsing="false" onAction="#delete" text="Delete" />
                   <Button fx:id="btnCloseProgram" mnemonicParsing="false" text="Close" />
                </children>
                <padding>

@@ -11,34 +11,29 @@ import java.util.ArrayList;
  *
  * @author gudla
  */
-public class Playlist
-{
+public class Playlist {
+
     private String name;
-    private ArrayList<Music> playlist = null;
+    private ArrayList<Music> playlist = new ArrayList();
 
-    public Playlist(String name)
-      {
+    public Playlist(String name) {
         this.name = name;
-      }
+    }
 
-    public String getName()
-      {
+    public String getName() {
         return name;
-      }
+    }
 
-    public void setName(String name)
-      {
+    public void setName(String name) {
         this.name = name;
-      }
-    
-    public void addSong(Music song)
-      {
-        playlist.add(song);
-      }
+    }
 
-    public ArrayList<Music> getPlaylist()
-      {
+    public void addSong(Music song) {
+        playlist.add(song);
+    }
+
+    public ArrayList<Music> getPlaylist() {
         return playlist;
-      }
-    
+    }
+
 }

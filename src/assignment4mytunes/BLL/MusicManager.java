@@ -7,6 +7,7 @@ package assignment4mytunes.BLL;
 
 import assignment4mytunes.BE.Music;
 import assignment4mytunes.DAL.MusicHandler;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -19,10 +20,9 @@ public class MusicManager {
 
     public void saveMusic(Music song) {
         musicHandler.saveMusic(song);
-        System.out.println("Not yet implemented");
     }
 
-    public ArrayList<Music> loadAllMusic() {
-        return musicHandler.loadAllMusic();
+    public ArrayList<Music> loadAllMusic() throws IOException {
+        return (ArrayList) musicHandler.loadAllMusic();
     }
 }

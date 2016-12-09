@@ -13,6 +13,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,50 +29,37 @@ import java.util.logging.Logger;
  *
  * @author gudla
  */
-public class PlaylistHandler
-{
+public class PlaylistHandler {
 
     private String fileName;
 
-    public PlaylistHandler()
-      {
+    public PlaylistHandler() {
 
-      }
+    }
 
-    public void savePlaylist(Playlist p)
-      {
+    public void savePlaylist(Playlist p) {
         p.getName();
         fileName = p.getName() + ".pll";
         File file = new File("DATA/Playlist/" + fileName);
         System.out.println(file.getAbsolutePath());
-        if (!file.exists())
-          {
-            try
-              {
+        if (!file.exists()) {
+            try {
                 file.createNewFile();
-              } catch (IOException ex)
-              {
+            } catch (IOException ex) {
                 Logger.getLogger(PlaylistHandler.class.getName()).log(Level.SEVERE, null, ex);
-              }
-          }
+            }
+        }
         savePlaylistMethod(p, file);
 
-      }
+    }
 
-    public ArrayList<Playlist> loadPlaylist()
-      {
-        throw new UnsupportedOperationException("Gudlaug should drown herself in a puddle of water");
-      }
-
-    public void savePlaylistMethod(Playlist p, File file)
-      {
+    public void savePlaylistMethod(Playlist p, File file) {
         ArrayList<Music> songs = p.getPlaylist();
 
         String plstString = "";
-        if (songs != null)
-          {
-            for (Music song : songs)
-              {
+        plstString += p.getName() + String.format("%n");;
+        if (songs != null) {
+            for (Music song : songs) {
                 plstString += song.getTitle()
                         + ","
                         + song.getArtist()
@@ -79,51 +70,49 @@ public class PlaylistHandler
                         + ","
                         + song.getTime()
                         + String.format("%n");
-              }
-          }
+            }
+        }
 
         try (BufferedWriter bw
                 = new BufferedWriter(
-                        new FileWriter(file.getAbsoluteFile())))
-          {
+                        new FileWriter(file.getAbsoluteFile()))) {
             bw.write(plstString);
-          } catch (IOException ex)
-          {
+        } catch (IOException ex) {
             java.util.logging.Logger.getLogger(PlaylistHandler.class.getName()).log(Level.SEVERE, null, ex);
-          }
+        }
 
-      }
+    }
 
-    public List<Playlist> getAll()
-      {
-        List<Playlist> plList
-                
-                = new ArrayList();
+    public List<Playlist> loadPlaylists() throws IOException {
+        List<Playlist> playlists = new ArrayList<>();
+        Path dir = Paths.get("DATA/Playlist/");
+        try (DirectoryStream<Path> stream
+                = Files.newDirectoryStream(dir, "*.pll")) {
+            for (Path entry : stream) {
+                System.out.println(entry.getFileName());
+                try (BufferedReader plFile
+                        = new BufferedReader(new FileReader("DATA/Playlist/" + entry.getFileName()))) {
+                    String dataLine = plFile.readLine();
+                    Playlist playlist = new Playlist(dataLine);
+                    dataLine = plFile.readLine();
+                    while (dataLine != null) {
+                        String[] splitData = dataLine.split(",");
+                        String title = splitData[0];
+                        String artist = splitData[1];
+                        String genre = splitData[2];
+                        String path = splitData[3];
+                        String time = splitData[4];
+                        Music music = new Music(title, artist, genre, path, time);
+                        playlist.addSong(music);
+                    }
 
-        try (BufferedReader br
-                = new BufferedReader(
-                        new FileReader(fileName)))
-          {
-            Scanner scanner = new Scanner(br);
-            while(scanner.hasNext())
-              {
-                String line = scanner.nextLine();
-                String[] fields = line.split(",");
-                plList.add(
-                    new Music(
-                            fields[0].trim(),
-                            fields[1].trim(),
-                            fields[2].trim(),
-                            fields[3].trim(),
-                            Integer.parseInt(fields[4].trim())
-                                                   
-                    ));
-              }
+                    playlists.add(playlist);
 
-          
-          } catch (IOException ex)
-          {
-            Logger.getLogger(PlaylistHandler.class.getName()).log(Level.SEVERE, null, ex);
-          }
-      }
+                }
+
+            }
+
+        }
+        return playlists;
+    }
 }

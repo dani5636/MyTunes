@@ -7,6 +7,7 @@ package assignment4mytunes.BLL;
 
 import assignment4mytunes.BE.Playlist;
 import assignment4mytunes.DAL.PlaylistHandler;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -15,16 +16,19 @@ import java.util.ArrayList;
  */
 public class PlaylistManager {
 
-    private PlaylistHandler pHandler;
+    private PlaylistHandler pHandler = new PlaylistHandler();
+
+    ;
 
     public void newPlaylist(Playlist playlist) {
-        pHandler = new PlaylistHandler();
 
         pHandler.savePlaylist(playlist);
     }
 
-    public ArrayList<Playlist> loadAllPlaylists() {
-        return pHandler.loadPlaylist();
+    public ArrayList<Playlist> loadAllPlaylists() throws IOException {
+
+        return (ArrayList<Playlist>) pHandler.loadPlaylists();
+
     }
 
 }

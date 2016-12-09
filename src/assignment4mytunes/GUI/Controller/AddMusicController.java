@@ -5,6 +5,7 @@
  */
 package assignment4mytunes.GUI.Controller;
 
+import assignment4mytunes.BE.Music;
 import assignment4mytunes.GUI.Model.MusicModel;
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +27,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -81,13 +86,14 @@ public class AddMusicController implements Initializable {
 
     @FXML
     private void FindFile(ActionEvent event) {
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Find your music!");
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
             txtTitle.setText(file.getName());
             txtPath.setText(file.getPath());
-
+            getDuration();
         }
     }
 
@@ -96,12 +102,19 @@ public class AddMusicController implements Initializable {
         Stage stage = (Stage) txtPath.getScene().getWindow();
         stage.close();
         MusicModel musicModel = MusicModel.getMusicModel();
-        musicModel.loadAllSongs();
     }
 
     @FXML
     private void Save(ActionEvent event) {
-        
+        if (!txtArtist.getText().isEmpty() && !txtPath.getText().isEmpty() && !txtTime.getText().isEmpty() && !txtTitle.getText().isEmpty() && !choiceGenre.getSelectionModel().getSelectedItem().isEmpty()) {
+
+            try {
+                getTextAndAddSong();
+            } catch (IOException ex) {
+
+            }
+
+        }
     }
 
     public void updateGenres() {
@@ -115,4 +128,39 @@ public class AddMusicController implements Initializable {
         choiceGenre.setItems(genres);
     }
 
+    public void getDuration() {
+        File filestring = new File(txtPath.getText());
+        Media file = new Media(filestring.toURI().toString());
+
+        MediaPlayer mediaPlayer = new MediaPlayer(file);
+
+        mediaPlayer.setOnReady(new Runnable() {
+
+            @Override
+            public void run() {
+                int minutes = (int) file.getDuration().toSeconds() / 60;
+                int calculation = minutes * 60;
+                int seconds = (int) file.getDuration().toSeconds() - calculation;
+                txtTime.setText(String.valueOf(minutes + ":" + seconds));
+            }
+        });
+    }
+
+    public void getTextAndAddSong() throws IOException {
+        String name = txtTitle.getText();
+        String artist = txtArtist.getText();
+        String genre = choiceGenre.getSelectionModel().getSelectedItem();
+        String duration = txtTime.getText();
+        String path = txtPath.getText();
+        path = path.replace(" ", "%20");
+        path = path.replace("\\", "/");
+        MusicModel musicModel = MusicModel.getMusicModel();
+        Music song = new Music(name, artist, genre, path, duration);
+        musicModel.saveSongs(song);
+        /*
+        UpdateListModel uList = UpdateListModel.getUpdateList();
+        uList.updateMainList();  */
+        Stage stage = (Stage) txtPath.getScene().getWindow();
+        stage.close();
+    }
 }

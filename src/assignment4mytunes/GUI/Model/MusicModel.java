@@ -45,17 +45,16 @@ public final class MusicModel {
         musicManager.saveMusic(song);
     }
 
-    public ArrayList<Music> loadAllSongs() {
-        musicManager.loadAllMusic();
-        return null;
+    public ArrayList<Music> loadAllSongs() throws IOException {
+        return musicManager.loadAllMusic();
+
     }
 
     public void newPlaylist(String name) {
         pManager.newPlaylist(new Playlist(name));
     }
-    
-    public ArrayList<Playlist> getAllPlaylists()
-      {
+
+    public ArrayList<Playlist> loadAllPlaylists() throws IOException {
         return pManager.loadAllPlaylists();
-      }
+    }
 }
