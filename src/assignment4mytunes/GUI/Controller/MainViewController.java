@@ -162,6 +162,12 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void delete(ActionEvent event) {
+        selectedItemFromList();
+        try {
+            windowloader("/assignment4mytunes/GUI/View/DeleteView.fxml");
+        } catch (IOException ex) {
+            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -180,4 +186,15 @@ public class MainViewController implements Initializable {
     private Music selectedSong() {
         return tblAllSongs.getSelectionModel().getSelectedItem();
     }
+    
+    private void selectedItemFromList()
+      {
+        tblPlaylist.getSelectionModel().getSelectedItem();
+        
+        tblAllSongs.getSelectionModel().getSelectedItem();
+        
+        tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
+        
+        
+      }
 }
