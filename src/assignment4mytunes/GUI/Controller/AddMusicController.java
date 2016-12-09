@@ -89,6 +89,8 @@ public class AddMusicController implements Initializable {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Find your music!");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("mp3 Files (*.mp3)", "*.mp3");
+        fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
             txtTitle.setText(file.getName());
