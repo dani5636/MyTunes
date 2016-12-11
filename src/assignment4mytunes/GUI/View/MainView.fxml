@@ -76,7 +76,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="284.0" prefWidth="300.0">
                     <children>
-                        <TableView fx:id="tblSongsOnPlaylist" onMouseClicked="#songsinPlaylistUpdate" prefHeight="284.0" prefWidth="256.0">
+                        <TableView fx:id="tblSongsOnPlaylist" onMouseClicked="#songsInPlaylistUpdate" prefHeight="284.0" prefWidth="256.0">
                             <columns>
                                 <TableColumn fx:id="tblSongsOnPlaylistArtist" prefWidth="128.0" text="Artist:" />
                                 <TableColumn fx:id="tblSongsOnPlaylistSongName" prefWidth="127.0" text="Song Name:" />

@@ -8,6 +8,7 @@ package assignment4mytunes.GUI.Controller;
 import assignment4mytunes.BE.Music;
 import assignment4mytunes.BE.Playlist;
 import assignment4mytunes.GUI.Model.MusicModel;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,7 +27,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
@@ -37,6 +37,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -182,33 +183,39 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void play(ActionEvent event) {
-        if (mp != null && mp.getStatus() == MediaPlayer.Status.PLAYING) {
-            mp.stop();
-        }
+        String path;
 
         if (lastClicked == 0 || lastClicked == 3) {
             System.out.println("Do nothing");
         }
         if (lastClicked == 1) {
-            /*  try {
-                mp = new MediaPlayer(new Media(tblSongsOnPlaylist.getSelectionModel().getSelectedItem().getPath()));
 
-                mp.play();
-            } catch (UnsupportedOperationException ex) {
-                Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+            path = tblSongsOnPlaylist.getSelectionModel().getSelectedItem().getPath();
+            Media media = new Media(new File(path).toURI().toString());
+            mp = new MediaPlayer(media);
+            mp.stop();
+
             System.out.println("Hopefully");
         }
         if (lastClicked == 2) {
-            /* try {
-                mp = new MediaPlayer(new Media(tblAllSongs.getSelectionModel().getSelectedItem().getPath()));
+            path = tblAllSongs.getSelectionModel().getSelectedItem().getPath();
+            Media media = new Media(new File(path).toURI().toString());
+            mp = new MediaPlayer(media);
 
-                mp.play();
-            } catch (UnsupportedOperationException ex) {
-                Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-             */ System.out.println("Works like a charm");
+            System.out.println("Works like a charm");
+            mp.stop();
         }
+        Status status = mp.getStatus();
+        System.out.println("");
+        if (status == Status.PAUSED
+                || status == Status.READY
+                || status == Status.STOPPED) {
+            mp.play();
+            System.out.println("should be playing");
+        } else {
+            mp.pause();
+        }
+
     }
 
     @FXML
@@ -240,9 +247,9 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void AddSongToPlaylist(ActionEvent event) {
-        Playlist p = null;
+        Playlist p;
         p = tblPlaylist.getSelectionModel().getSelectedItem();
-        Music m = null;
+        Music m;
         m = tblAllSongs.getSelectionModel().getSelectedItem();
         if (m != null && p != null) {
             p.addSong(m);
@@ -275,7 +282,7 @@ public class MainViewController implements Initializable {
     }
 
     @FXML
-    private void songsinPlaylistUpdate(MouseEvent event) {
+    private void songsInPlaylistUpdate(MouseEvent event) {
         lastClicked = 1;
         System.out.println(lastClicked + "");
     }
