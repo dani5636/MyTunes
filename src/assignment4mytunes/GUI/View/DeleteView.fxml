@@ -8,7 +8,8 @@
    <children>
       <Button layoutX="213.0" layoutY="204.0" mnemonicParsing="false" text="Delete" />
       <Label layoutX="98.0" layoutY="42.0" text="Are you sure you want to delete:" />
-      <Label fx:id="lblSelected" layoutX="184.0" layoutY="114.0" prefHeight="21.0" prefWidth="44.0" />
+      <Label fx:id="lblPlaylist" layoutX="146.0" layoutY="114.0" prefHeight="21.0" prefWidth="253.0" />
       <Button layoutX="129.0" layoutY="204.0" mnemonicParsing="false" text="Cancel" />
+      <Label fx:id="lblSongs" layoutX="146.0" layoutY="114.0" prefHeight="21.0" prefWidth="261.0" />
    </children>
 </AnchorPane>

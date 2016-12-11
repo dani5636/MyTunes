@@ -136,7 +136,6 @@ public class MainViewController implements Initializable {
 
     public void updater() {
         MusicModel musicModel = MusicModel.getMusicModel();
-        selectedItemFromList();
 
         try {
             if (!musicModel.loadAllSongs().isEmpty()) {
@@ -166,15 +165,39 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void delete(ActionEvent event) {
-//        selectedItemFromList();
-//        try
-//          {
-//            windowloader("/assignment4mytunes/GUI/View/DeleteView.fxml");
-//          } catch (IOException ex)
-//          {
-//
-//            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-//          }
+        Stage primaryStage = (Stage) btnNewSong.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/assignment4mytunes/GUI/View/DeleteView.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Stage subStage = new Stage();
+        subStage.setScene(new Scene(root));
+        MusicModel musicModel = MusicModel.getMusicModel();
+        musicModel.setMainView(this);
+        subStage.initModality(Modality.WINDOW_MODAL);
+        subStage.initOwner(primaryStage);
+        subStage.show();
+
+        DeleteViewController deleteViewController
+                = loader.getController();
+
+        if (lastClicked == 2) {
+            Music music = tblAllSongs.getSelectionModel().getSelectedItem();
+            System.out.println("ALLSONGS");
+            deleteViewController.setMusicLable(music);
+        } else if (lastClicked == 1) {
+            Music music = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            System.out.println("SONGS ON PLAYLIST");
+            deleteViewController.setMusicLable(music);
+        } else if (lastClicked == 3) {
+            Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
+            System.out.println("PLAYLIST");
+            deleteViewController.setPlaylistLable(playlist);
+        }
+
     }
 
     @FXML
@@ -183,22 +206,27 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void play(ActionEvent event) {
-        String path;
+        if (mp != null && mp.getStatus() == MediaPlayer.Status.PLAYING) {
+            mp.stop();
+        }
 
         if (lastClicked == 0 || lastClicked == 3) {
             System.out.println("Do nothing");
         }
         if (lastClicked == 1) {
 
-            path = tblSongsOnPlaylist.getSelectionModel().getSelectedItem().getPath();
+            mp = new MediaPlayer(new Media(tblSongsOnPlaylist.getSelectionModel().getSelectedItem().getPath()));
+
+            String path = tblSongsOnPlaylist.getSelectionModel().getSelectedItem().getPath();
             Media media = new Media(new File(path).toURI().toString());
             mp = new MediaPlayer(media);
             mp.stop();
 
             System.out.println("Hopefully");
+
         }
         if (lastClicked == 2) {
-            path = tblAllSongs.getSelectionModel().getSelectedItem().getPath();
+            String path = tblAllSongs.getSelectionModel().getSelectedItem().getPath();
             Media media = new Media(new File(path).toURI().toString());
             mp = new MediaPlayer(media);
 
@@ -226,28 +254,10 @@ public class MainViewController implements Initializable {
         return tblAllSongs.getSelectionModel().getSelectedItem();
     }
 
-    private void selectedItemFromList() {
-//        if (tblAllSongs.isFocused())
-//              System.out.println("TableAllSongs");
-//        else if (tblPlaylist.isFocused())
-//              System.out.println("TablePlaylist");
-//        else if (tblSongsOnPlaylist.isFocused())
-//              System.out.println("Songs on Playlist");
-
-        tblAllSongs.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection)
-                -> {
-            if (newSelection != null) {
-                tblPlaylist.getSelectionModel().getSelectedItem();
-                System.out.println("Table All Songs");
-
-            }
-        });
-
-    }
-
     @FXML
     private void AddSongToPlaylist(ActionEvent event) {
         Playlist p;
+
         p = tblPlaylist.getSelectionModel().getSelectedItem();
         Music m;
         m = tblAllSongs.getSelectionModel().getSelectedItem();
