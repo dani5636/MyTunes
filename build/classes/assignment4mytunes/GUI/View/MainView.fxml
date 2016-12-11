@@ -54,7 +54,6 @@
                     <children>
                         <Button fx:id="btnNewPlaylist" mnemonicParsing="false" onAction="#newPlaylist" text="New..." />
                         <Button fx:id="btnEditPlaylist" mnemonicParsing="false" text="Edit..." />
-                        <Button fx:id="btnDeletePlaylist" mnemonicParsing="false" onAction="#delete" text="Delete" />
                     </children>
                 </HBox>
             </children>
@@ -88,7 +87,6 @@
                     <children>
                         <Button fx:id="btnMoveUpSong" mnemonicParsing="false" text="^" />
                         <Button fx:id="btnMoveDownSong" mnemonicParsing="false" text="v" />
-                        <Button fx:id="btnDeleteSong" mnemonicParsing="false" onAction="#delete" text="Delete" />
                     </children>
                 </HBox>
             </children>
@@ -121,7 +119,6 @@
                     <children>
                         <Button fx:id="btnNewSong" mnemonicParsing="false" onAction="#newMusic" text="New..." />
                         <Button fx:id="btnEditSong" mnemonicParsing="false" text="Edit..." />
-                        <Button fx:id="btnDeleteSong" mnemonicParsing="false" onAction="#delete" text="Delete" />
                     </children>
                     <padding>
                         <Insets left="10.0" right="10.0" />
@@ -138,5 +135,6 @@
             </children>
         </VBox>
             <Button fx:id="btnCloseProgram" layoutX="830.0" layoutY="456.0" mnemonicParsing="false" text="Close" />
+            <Button fx:id="btnDeleteSong" layoutX="759.0" layoutY="456.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
     </children>
 </AnchorPane>

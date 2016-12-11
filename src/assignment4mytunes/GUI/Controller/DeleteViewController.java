@@ -5,6 +5,8 @@
  */
 package assignment4mytunes.GUI.Controller;
 
+import assignment4mytunes.BE.Music;
+import assignment4mytunes.BE.Playlist;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -19,8 +21,13 @@ import javafx.scene.control.Label;
 public class DeleteViewController implements Initializable
 {
 
+    
+    private Playlist thisPlaylist;
+    private Music thisMusic;
     @FXML
-    private Label lblSelected;
+    private Label lblPlaylist;
+    @FXML
+    private Label lblSongs;
 
     /**
      * Initializes the controller class.
@@ -28,13 +35,34 @@ public class DeleteViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
       {
+        
         // TODO
       }   
 
-    public DeleteViewController()
+    
+    
+    
+      
+
+    public void setMusicLable(Music music)
       {
+        thisMusic = music;
+        lblSongs.setText(thisMusic.getTitle());
         
       }
+
+    public void setPlaylistLable(Playlist playlist)
+      {
+        thisPlaylist = playlist;
+        lblPlaylist.setText(thisPlaylist.getName());
+        
+  
+      }
+    
+
+   
+    
+    
     
     
 }
