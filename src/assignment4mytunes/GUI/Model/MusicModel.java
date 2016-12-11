@@ -10,6 +10,7 @@ import assignment4mytunes.BE.Playlist;
 import assignment4mytunes.BLL.GenreManager;
 import assignment4mytunes.BLL.MusicManager;
 import assignment4mytunes.BLL.PlaylistManager;
+import assignment4mytunes.GUI.Controller.MainViewController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public final class MusicModel {
     private GenreManager genreManager = new GenreManager();
     private PlaylistManager pManager = new PlaylistManager();
     private MusicManager musicManager = new MusicManager();
+    private MainViewController mainView = null;
 
     private MusicModel() {
 
@@ -57,4 +59,18 @@ public final class MusicModel {
     public ArrayList<Playlist> loadAllPlaylists() throws IOException {
         return pManager.loadAllPlaylists();
     }
+
+    public void savePlaylist(Playlist p) {
+        pManager.newPlaylist(p);
+        System.out.println("Trying to save");
+    }
+
+    public MainViewController getMainView() {
+        return mainView;
+    }
+
+    public void setMainView(MainViewController mainView) {
+        this.mainView = mainView;
+    }
+
 }
