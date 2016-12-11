@@ -40,7 +40,8 @@ import javafx.scene.media.Media;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class MainViewController implements Initializable {
+public class MainViewController implements Initializable
+{
 
     @FXML
     private Button btnPrevSong;
@@ -93,33 +94,42 @@ public class MainViewController implements Initializable {
     MediaPlayer mp = null;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+      {
         updater();
+        
 
         // bindPlayerToGUI();
         // TOD
-    }
+      }
 
     @FXML
-    private void newMusic(ActionEvent event) {
-        try {
+    private void newMusic(ActionEvent event)
+      {
+        try
+          {
             windowloader("/assignment4mytunes/GUI/View/AddMusic.fxml");
 
-        } catch (IOException ex) {
+          } catch (IOException ex)
+          {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+          }
+      }
 
     @FXML
-    private void newPlaylist(ActionEvent event) {
-        try {
+    private void newPlaylist(ActionEvent event)
+      {
+        try
+          {
             windowloader("/assignment4mytunes/GUI/View/AddPlaylist.fxml");
-        } catch (IOException ex) {
+          } catch (IOException ex)
+          {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+          }
+      }
 
-    private void windowloader(String p) throws IOException {
+    private void windowloader(String p) throws IOException
+      {
         Stage primaryStage = (Stage) btnNewSong.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(p));
         Parent root = loader.load();
@@ -131,13 +141,21 @@ public class MainViewController implements Initializable {
         subStage.initOwner(primaryStage);
 
         subStage.show();
-    }
+      }
 
+<<<<<<< HEAD
+    private void updater()
+      {
+=======
     public void updater() {
+>>>>>>> origin/master
         MusicModel musicModel = MusicModel.getMusicModel();
-
-        try {
-            if (!musicModel.loadAllSongs().isEmpty()) {
+        selectedItemFromList();
+        
+        try
+          {
+            if (!musicModel.loadAllSongs().isEmpty())
+              {
                 ObservableList<Music> sngList
                         = FXCollections.observableArrayList(musicModel.loadAllSongs());
                 tblAllSongs.setItems(sngList);
@@ -145,36 +163,49 @@ public class MainViewController implements Initializable {
                         new PropertyValueFactory("title"));
                 tblAllSongsArtist.setCellValueFactory(
                         new PropertyValueFactory("artist"));
+<<<<<<< HEAD
+              }
+            if (!musicModel.loadAllPlaylists().isEmpty())
+              {
+=======
                 updateSongsPlaylist();
             }
             if (!musicModel.loadAllPlaylists().isEmpty()) {
+>>>>>>> origin/master
                 ObservableList<Playlist> pList
                         = FXCollections.observableArrayList(musicModel.loadAllPlaylists());
                 tblPlaylist.setItems(pList);
                 clmPlaylist.setCellValueFactory(
                         new PropertyValueFactory("name"));
 
-            }
-        } catch (IOException ex) {
+              }
+          } catch (IOException ex)
+          {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+          }
+      }
 
     @FXML
-    private void delete(ActionEvent event) {
-        selectedItemFromList();
-        try {
-            windowloader("/assignment4mytunes/GUI/View/DeleteView.fxml");
-        } catch (IOException ex) {
-            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    private void delete(ActionEvent event)
+      {
+//        selectedItemFromList();
+//        try
+//          {
+//            windowloader("/assignment4mytunes/GUI/View/DeleteView.fxml");
+//          } catch (IOException ex)
+//          {
+//
+//            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+//          }
+      }
 
     @FXML
-    private void prev(ActionEvent event) {
-    }
+    private void prev(ActionEvent event)
+      {
+      }
 
     @FXML
+<<<<<<< HEAD
     private void play(ActionEvent event) {
         if (mp != null && mp.getStatus() == MediaPlayer.Status.PLAYING) {
             mp.stop();
@@ -204,13 +235,46 @@ public class MainViewController implements Initializable {
              */ System.out.println("Works like a charm");
         }
     }
+=======
+    private void play(ActionEvent event)
+      {
+
+      }
+>>>>>>> origin/master
 
     @FXML
-    private void next(ActionEvent event) {
-    }
+    private void next(ActionEvent event)
+      {
+      }
 
-    private Music selectedSong() {
+    private Music selectedSong()
+      {
         return tblAllSongs.getSelectionModel().getSelectedItem();
+<<<<<<< HEAD
+      }
+
+    private void selectedItemFromList()
+      {
+//        if (tblAllSongs.isFocused())
+//              System.out.println("TableAllSongs");
+//        else if (tblPlaylist.isFocused())
+//              System.out.println("TablePlaylist");
+//        else if (tblSongsOnPlaylist.isFocused())
+//              System.out.println("Songs on Playlist");
+
+        tblAllSongs.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> 
+          {
+            if (newSelection != null)
+              {
+                tblPlaylist.getSelectionModel().getSelectedItem();
+                System.out.println("Table All Songs");              
+               
+                
+              } 
+          });
+
+      }
+=======
     }
 
     private void selectedItemFromList() {
@@ -269,5 +333,9 @@ public class MainViewController implements Initializable {
         lastClicked = 2;
         System.out.println(lastClicked + "");
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
 }
