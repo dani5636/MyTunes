@@ -52,8 +52,6 @@ public class MainViewController implements Initializable
     @FXML
     private Button btnEditPlaylist;
     @FXML
-    private Button btnDeletePlaylist;
-    @FXML
     private Label lblCurrentSong;
     @FXML
     private Button btnMoveUpSong;
@@ -197,29 +195,26 @@ public class MainViewController implements Initializable
         subStage.initModality(Modality.WINDOW_MODAL);
         subStage.initOwner(primaryStage);
         subStage.show();
-        
-        DeleteViewController deleteViewController = 
-                loader.getController();
-        
-     
+
+        DeleteViewController deleteViewController
+                = loader.getController();
 
         if (lastClicked == 2)
           {
             Music music = tblAllSongs.getSelectionModel().getSelectedItem();
-              System.out.println("ALLSONGS");
-                 deleteViewController.setMusicLable(music);
+            System.out.println("ALLSONGS");
+            deleteViewController.setMusicLable(music);
           } else if (lastClicked == 1)
           {
             Music music = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
-              System.out.println("SONGS ON PLAYLIST");
-              deleteViewController.setMusicLable(music);
+            System.out.println("SONGS ON PLAYLIST");
+            deleteViewController.setMusicLable(music);
           } else if (lastClicked == 3)
           {
             Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
-              System.out.println("PLAYLIST");
-              deleteViewController.setPlaylistLable(playlist);
+            System.out.println("PLAYLIST");
+            deleteViewController.setPlaylistLable(playlist);
           }
-        
 
       }
 
@@ -328,4 +323,39 @@ public class MainViewController implements Initializable
         lastClicked = 2;
         System.out.println(lastClicked + "");
       }
+
+    @FXML
+    private void editPlaylist(ActionEvent event)
+      {
+        if (lastClicked == 3)
+          {
+            Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
+            System.out.println("EDITPLAYLIST");
+
+            Stage primaryStage = (Stage) btnNewSong.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/assignment4mytunes/GUI/View/EditPlaylist.fxml"));
+            Parent root = null;
+            try
+              {
+                root = loader.load();
+              } catch (IOException ex)
+              {
+                Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+              }
+            Stage subStage = new Stage();
+            subStage.setScene(new Scene(root));
+            MusicModel musicModel = MusicModel.getMusicModel();
+            musicModel.setMainView(this);
+            subStage.initModality(Modality.WINDOW_MODAL);
+            subStage.initOwner(primaryStage);
+            subStage.show();
+
+            EditPlaylistController editPlaylistViewController
+                    = loader.getController();
+            editPlaylistViewController.setTxtName(playlist);
+            
+          }
+
+      }
+
 }
