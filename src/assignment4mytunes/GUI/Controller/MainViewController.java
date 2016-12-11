@@ -89,6 +89,7 @@ public class MainViewController implements Initializable {
     @FXML
     private TableColumn<Playlist, ?> clmTime;
 
+    private int lastClicked;
     MediaPlayer mp = null;
 
     @Override
@@ -175,7 +176,33 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void play(ActionEvent event) {
+        if (mp != null && mp.getStatus() == MediaPlayer.Status.PLAYING) {
+            mp.stop();
+        }
 
+        if (lastClicked == 0 || lastClicked == 3) {
+            System.out.println("Do nothing");
+        }
+        if (lastClicked == 1) {
+            /*  try {
+                mp = new MediaPlayer(new Media(tblSongsOnPlaylist.getSelectionModel().getSelectedItem().getPath()));
+
+                mp.play();
+            } catch (UnsupportedOperationException ex) {
+                Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+            System.out.println("Hopefully");
+        }
+        if (lastClicked == 2) {
+            /* try {
+                mp = new MediaPlayer(new Media(tblAllSongs.getSelectionModel().getSelectedItem().getPath()));
+
+                mp.play();
+            } catch (UnsupportedOperationException ex) {
+                Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             */ System.out.println("Works like a charm");
+        }
     }
 
     @FXML
@@ -225,8 +252,22 @@ public class MainViewController implements Initializable {
     }
 
     @FXML
-    private void songsInPlaylist(MouseEvent event) {
+    private void PlaylistUpdate(MouseEvent event) {
         updateSongsPlaylist();
-
+        lastClicked = 3;
+        System.out.println(lastClicked + "");
     }
+
+    @FXML
+    private void songsinPlaylistUpdate(MouseEvent event) {
+        lastClicked = 1;
+        System.out.println(lastClicked + "");
+    }
+
+    @FXML
+    private void songsUpdate(MouseEvent event) {
+        lastClicked = 2;
+        System.out.println(lastClicked + "");
+    }
+
 }

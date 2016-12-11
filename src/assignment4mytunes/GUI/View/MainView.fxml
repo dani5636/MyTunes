@@ -39,7 +39,7 @@
                 </VBox>
                 <HBox alignment="CENTER" prefHeight="283.0" prefWidth="300.0">
                     <children>
-                        <TableView fx:id="tblPlaylist" onMouseClicked="#songsInPlaylist" prefHeight="200.0" prefWidth="200.0">
+                        <TableView fx:id="tblPlaylist" onMouseClicked="#PlaylistUpdate" prefHeight="200.0" prefWidth="200.0">
                             <columns>
                                 <TableColumn fx:id="clmPlaylist" prefWidth="111.0" text="Playlist Name" />
                                 <TableColumn fx:id="clmTime" prefWidth="88.0" text="Total Time" />
@@ -76,7 +76,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="284.0" prefWidth="300.0">
                     <children>
-                        <TableView fx:id="tblSongsOnPlaylist" prefHeight="284.0" prefWidth="256.0">
+                        <TableView fx:id="tblSongsOnPlaylist" onMouseClicked="#songsinPlaylistUpdate" prefHeight="284.0" prefWidth="256.0">
                             <columns>
                                 <TableColumn fx:id="tblSongsOnPlaylistArtist" prefWidth="128.0" text="Artist:" />
                                 <TableColumn fx:id="tblSongsOnPlaylistSongName" prefWidth="127.0" text="Song Name:" />
@@ -109,7 +109,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="286.0" prefWidth="285.0">
                     <children>
-                        <TableView fx:id="tblAllSongs" prefHeight="286.0" prefWidth="292.0">
+                        <TableView fx:id="tblAllSongs" onMouseClicked="#songsUpdate" prefHeight="286.0" prefWidth="292.0">
                             <columns>
                                 <TableColumn fx:id="tblAllSongsArtist" prefWidth="148.0" text="Artist:" />
                                 <TableColumn fx:id="tblAllSongsName" prefWidth="146.0" text="Song Name:" />
