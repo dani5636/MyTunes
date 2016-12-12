@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="270.0" prefWidth="378.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60" fx:controller="assignment4mytunes.GUI.Controller.EditPlaylistController">
+   <children>
+      <Label layoutX="99.0" layoutY="56.0" text="Edit Playlist">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="135.0" text="Name:" />
+      <Button fx:id="btnSave" layoutX="232.0" layoutY="205.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="btnCancel" layoutX="144.0" layoutY="205.0" mnemonicParsing="false" text="Cancel" />
+      <TextField fx:id="txtName" layoutX="96.0" layoutY="130.0" />
+   </children>
+</AnchorPane>

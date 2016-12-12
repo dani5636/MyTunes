@@ -53,7 +53,7 @@
                 <HBox alignment="CENTER" prefHeight="39.0" prefWidth="300.0" spacing="10.0">
                     <children>
                         <Button fx:id="btnNewPlaylist" mnemonicParsing="false" onAction="#newPlaylist" text="New..." />
-                        <Button fx:id="btnEditPlaylist" mnemonicParsing="false" text="Edit..." />
+                        <Button fx:id="btnEditPlaylist" mnemonicParsing="false" onAction="#editPlaylist" text="Edit..." />
                     </children>
                 </HBox>
             </children>
