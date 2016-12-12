@@ -5,6 +5,7 @@
  */
 package assignment4mytunes.GUI.Model;
 
+
 import assignment4mytunes.BE.Music;
 import assignment4mytunes.BE.Playlist;
 import assignment4mytunes.BLL.GenreManager;
@@ -14,6 +15,10 @@ import assignment4mytunes.GUI.Controller.MainViewController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -26,9 +31,19 @@ public final class MusicModel {
     private PlaylistManager pManager = new PlaylistManager();
     private MusicManager musicManager = new MusicManager();
     private MainViewController mainView = null;
+    
+    private final ObservableList<Music> thisMusic;
 
-    private MusicModel() {
-
+    private MusicModel()  {
+        thisMusic = FXCollections.observableArrayList();
+        try
+          {
+            
+            thisMusic.addAll(musicManager.loadAllMusic());
+          } catch (IOException ex)
+          {
+            Logger.getLogger(MusicModel.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }
 
     public static MusicModel getMusicModel() {
@@ -45,6 +60,7 @@ public final class MusicModel {
 
     public void saveSongs(Music song) {
         musicManager.saveMusic(song);
+        thisMusic.add(song);
     }
 
     public ArrayList<Music> loadAllSongs() throws IOException {
@@ -72,6 +88,23 @@ public final class MusicModel {
     public void setMainView(MainViewController mainView) {
         this.mainView = mainView;
     }
+
+    public void removeSong(Music music)
+      {
+        
+        
+        //TODO delete song from file
+        thisMusic.remove(music);
+        
+          
+      }
+
+    public ObservableList<Music> getAllSongs()
+      {
+       return thisMusic;
+      }
+    
+    
     
     
 

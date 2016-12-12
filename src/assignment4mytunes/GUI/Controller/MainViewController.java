@@ -160,7 +160,7 @@ public class MainViewController implements Initializable
             if (!musicModel.loadAllSongs().isEmpty())
               {
                 ObservableList<Music> sngList
-                        = FXCollections.observableArrayList(musicModel.loadAllSongs());
+                        = musicModel.getAllSongs();
                 tblAllSongs.setItems(sngList);
                 tblAllSongsName.setCellValueFactory(
                         new PropertyValueFactory("title"));
@@ -198,11 +198,23 @@ public class MainViewController implements Initializable
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
           {
-            System.out.println("THIS WAS NOT DELETED COUSE I HAVE NOT IMPLAMENTED THE DELETE FUNCTION");
-          } else
+            MusicModel musicModel = MusicModel.getMusicModel();
+            if (lastClicked == ALL_SONGS)
           {
+            Music music = tblAllSongs.getSelectionModel().getSelectedItem();
+            musicModel.removeSong(music);
 
+          } else if (lastClicked == SONGS_ON_PLAYLIST)
+          {
+            Music music = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            
+
+          } else if (lastClicked == PLAYLIST)
+          {
+            Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
+           
           }
+          } 
 
       }
 
