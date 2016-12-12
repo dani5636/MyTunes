@@ -118,7 +118,7 @@
                 <HBox prefHeight="1.0" prefWidth="309.0" spacing="5.0">
                     <children>
                         <Button fx:id="btnNewSong" mnemonicParsing="false" onAction="#newMusic" text="New..." />
-                        <Button fx:id="btnEditSong" mnemonicParsing="false" text="Edit..." />
+                        <Button fx:id="btnEditSong" mnemonicParsing="false" onAction="#editSong" text="Edit..." />
                     </children>
                     <padding>
                         <Insets left="10.0" right="10.0" />

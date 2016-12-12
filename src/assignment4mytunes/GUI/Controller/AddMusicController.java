@@ -53,6 +53,12 @@ public class AddMusicController implements Initializable {
 
     @FXML
     private Button btnGenre;
+    
+    private Music thisTitle;
+    private Music thisArtist;
+    private Music thisGenre;
+    private Music thisTime;
+    private Music thisFile;
 
     public AddMusicController() {
 
@@ -166,5 +172,39 @@ public class AddMusicController implements Initializable {
         uList.updateMainList();  */
         Stage stage = (Stage) txtPath.getScene().getWindow();
         stage.close();
+        
     }
+    
+    public void setTitle(Music title)
+      {
+        thisTitle = title;
+        txtTitle.setText(thisTitle.getTitle());
+      }
+    
+    public void setArtist(Music artist)
+      {
+        thisArtist = artist;
+        txtArtist.setText(thisArtist.getArtist());
+      }
+    
+    public void setGenre(Music genre)
+      {
+        thisGenre = genre;
+        
+      }
+    
+    public void setTime(Music time)
+      {
+        thisTime = time;
+        txtTime.setText(thisTime.getTime());
+      }
+    
+    public void setFile(Music file)
+      {
+        thisFile = file;
+        txtPath.setText(thisFile.getPath());
+      }
+    
+    
+    
 }

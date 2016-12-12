@@ -44,4 +44,6 @@ public class EditPlaylistController implements Initializable
         txtName.setText(namePlaylist.getName());
       }
     
+    
+    
 }

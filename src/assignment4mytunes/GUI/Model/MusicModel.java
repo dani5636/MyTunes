@@ -72,5 +72,7 @@ public final class MusicModel {
     public void setMainView(MainViewController mainView) {
         this.mainView = mainView;
     }
+    
+    
 
 }
