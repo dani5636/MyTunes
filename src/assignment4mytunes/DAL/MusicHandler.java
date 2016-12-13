@@ -88,5 +88,14 @@ public class MusicHandler {
         }
         return allSongs;
     }
+    
+    public void removeSong(Music song)
+      {
+        String fileName = song.getTitle() + ".sng";
+        File file = new File("DATA/Songs/" + fileName);
+        if (file.exists()) {
+            file.delete();
+        }
+      }
 
 }

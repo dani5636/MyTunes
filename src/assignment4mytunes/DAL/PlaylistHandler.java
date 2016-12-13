@@ -115,4 +115,13 @@ public class PlaylistHandler {
         }
         return playlists;
     }
+    
+    public void removePlaylist (Playlist playlist)
+      {
+        String fileName = playlist.getName() + ".pll";
+        File file = new File("DATA/Playlist/" + fileName);
+        if (file.exists()) {
+            file.delete();
+        }
+      }
 }

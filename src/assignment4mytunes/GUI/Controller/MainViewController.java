@@ -212,7 +212,8 @@ public class MainViewController implements Initializable
           } else if (lastClicked == PLAYLIST)
           {
             Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
-           
+           musicModel.removePlaylist(playlist);
+           updater();
           }
           } 
 
