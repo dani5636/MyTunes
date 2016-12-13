@@ -53,7 +53,7 @@ public class AddMusicController implements Initializable {
 
     @FXML
     private Button btnGenre;
-    
+
     private Music thisTitle;
     private Music thisArtist;
     private Music thisGenre;
@@ -99,8 +99,10 @@ public class AddMusicController implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
+            String path = file.getAbsolutePath();
+            path = path.replace("\\", "/");
             txtTitle.setText(file.getName());
-            txtPath.setText(file.getPath());
+            txtPath.setText(path);
             getDuration();
         }
     }
@@ -160,7 +162,7 @@ public class AddMusicController implements Initializable {
         String genre = choiceGenre.getSelectionModel().getSelectedItem();
         String duration = txtTime.getText();
         String path = txtPath.getText();
-        path = path.replace(" ", "%20");
+        //path = path.replace(" ", "%20");
         path = path.replace("\\", "/");
         MusicModel musicModel = MusicModel.getMusicModel();
         Music song = new Music(name, artist, genre, path, duration);
@@ -172,39 +174,32 @@ public class AddMusicController implements Initializable {
         uList.updateMainList();  */
         Stage stage = (Stage) txtPath.getScene().getWindow();
         stage.close();
-        
+
     }
-    
-    public void setTitle(Music title)
-      {
+
+    public void setTitle(Music title) {
         thisTitle = title;
         txtTitle.setText(thisTitle.getTitle());
-      }
-    
-    public void setArtist(Music artist)
-      {
+    }
+
+    public void setArtist(Music artist) {
         thisArtist = artist;
         txtArtist.setText(thisArtist.getArtist());
-      }
-    
-    public void setGenre(Music genre)
-      {
+    }
+
+    public void setGenre(Music genre) {
         thisGenre = genre;
-        
-      }
-    
-    public void setTime(Music time)
-      {
+
+    }
+
+    public void setTime(Music time) {
         thisTime = time;
         txtTime.setText(thisTime.getTime());
-      }
-    
-    public void setFile(Music file)
-      {
+    }
+
+    public void setFile(Music file) {
         thisFile = file;
         txtPath.setText(thisFile.getPath());
-      }
-    
-    
-    
+    }
+
 }

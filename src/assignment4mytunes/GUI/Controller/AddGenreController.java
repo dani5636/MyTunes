@@ -29,7 +29,7 @@ public class AddGenreController implements Initializable {
     private TextField txtField;
     private boolean isRunning;
     private AddMusicController addMusicController;
-    private MusicModel musicModel = null;
+    private MusicModel musicModel = MusicModel.getMusicModel();
 
     /**
      * Initializes the controller class.
