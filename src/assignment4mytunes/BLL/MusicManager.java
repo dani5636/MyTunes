@@ -25,4 +25,9 @@ public class MusicManager {
     public ArrayList<Music> loadAllMusic() throws IOException {
         return (ArrayList) musicHandler.loadAllMusic();
     }
+    
+    public void removeMusic(Music song)
+      {
+        musicHandler.removeSong(song);
+      }
 }

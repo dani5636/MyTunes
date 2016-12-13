@@ -33,17 +33,29 @@ public final class MusicModel {
     private MainViewController mainView = null;
     
     private final ObservableList<Music> thisMusic;
+    private final ObservableList<Playlist> thisPlaylist;
 
     private MusicModel()  {
         thisMusic = FXCollections.observableArrayList();
         try
           {
-            
+           
             thisMusic.addAll(musicManager.loadAllMusic());
           } catch (IOException ex)
           {
             Logger.getLogger(MusicModel.class.getName()).log(Level.SEVERE, null, ex);
           }
+        
+        thisPlaylist = FXCollections.observableArrayList();
+        try
+          {
+            thisPlaylist.addAll(pManager.loadAllPlaylists());
+            
+          } catch (IOException ex)
+          {
+            Logger.getLogger(MusicModel.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        
     }
 
     public static MusicModel getMusicModel() {
@@ -92,16 +104,28 @@ public final class MusicModel {
     public void removeSong(Music music)
       {
         
+        musicManager.removeMusic(music);
         
-        //TODO delete song from file
         thisMusic.remove(music);
         
           
       }
+    
+    public void removePlaylist(Playlist playlist){
+        pManager.removePlaylist(playlist);
+        
+        //TODO remove the playlist from view
+        
+    }
 
     public ObservableList<Music> getAllSongs()
       {
        return thisMusic;
+      }
+    
+    public ObservableList<Playlist> getAllPlaylist()
+      {
+        return thisPlaylist;
       }
     
     

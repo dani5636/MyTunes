@@ -30,5 +30,10 @@ public class PlaylistManager {
         return (ArrayList<Playlist>) pHandler.loadPlaylists();
 
     }
+    
+    public void removePlaylist(Playlist playlist ){
+        pHandler.removePlaylist(playlist);
+        
+    }
 
 }
