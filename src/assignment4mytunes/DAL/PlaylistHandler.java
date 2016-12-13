@@ -84,6 +84,10 @@ public class PlaylistHandler {
     }
 
     public List<Playlist> loadPlaylists() throws IOException {
+        File dir1 = new File("DATA/Playlist");
+        if (!dir1.exists()) {
+            dir1.mkdir();
+        }
         List<Playlist> playlists = new ArrayList<>();
         Path dir = Paths.get("DATA/Playlist/");
         try (DirectoryStream<Path> stream
@@ -115,13 +119,12 @@ public class PlaylistHandler {
         }
         return playlists;
     }
-    
-    public void removePlaylist (Playlist playlist)
-      {
+
+    public void removePlaylist(Playlist playlist) {
         String fileName = playlist.getName() + ".pll";
         File file = new File("DATA/Playlist/" + fileName);
         if (file.exists()) {
             file.delete();
         }
-      }
+    }
 }
