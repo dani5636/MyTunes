@@ -11,6 +11,7 @@ import assignment4mytunes.GUI.Model.MusicModel;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -45,8 +46,7 @@ import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class MainViewController implements Initializable
-{
+public class MainViewController implements Initializable {
 
     @FXML
     private Button btnPrevSong;
@@ -99,45 +99,39 @@ public class MainViewController implements Initializable
     public static final int ALL_SONGS = 2;
     public static final int PLAYLIST = 3;
 
+    private int songPlaying;
+    private ArrayList<Music> currentlyPlaying = new ArrayList();
     private int lastClicked;
     MediaPlayer mp = null;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-      {
+    public void initialize(URL url, ResourceBundle rb) {
         updater();
 
         // bindPlayerToGUI();
         // TOD
-      }
+    }
 
     @FXML
-    private void newMusic(ActionEvent event)
-      {
-        try
-          {
+    private void newMusic(ActionEvent event) {
+        try {
             windowloader("/assignment4mytunes/GUI/View/AddMusic.fxml");
 
-          } catch (IOException ex)
-          {
+        } catch (IOException ex) {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-          }
-      }
+        }
+    }
 
     @FXML
-    private void newPlaylist(ActionEvent event)
-      {
-        try
-          {
+    private void newPlaylist(ActionEvent event) {
+        try {
             windowloader("/assignment4mytunes/GUI/View/AddPlaylist.fxml");
-          } catch (IOException ex)
-          {
+        } catch (IOException ex) {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-          }
-      }
+        }
+    }
 
-    private void windowloader(String p) throws IOException
-      {
+    private void windowloader(String p) throws IOException {
         Stage primaryStage = (Stage) btnNewSong.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(p));
         Parent root = loader.load();
@@ -149,16 +143,14 @@ public class MainViewController implements Initializable
         subStage.initOwner(primaryStage);
 
         subStage.show();
-      }
+    }
 
-    public void updater()
-      {
+    public void updater() {
         MusicModel musicModel = MusicModel.getMusicModel();
 
-        try
-          {
-            if (!musicModel.loadAllSongs().isEmpty())
-              {
+        try {
+            if (!musicModel.loadAllSongs().isEmpty()) {
+
                 ObservableList<Music> sngList
                         = musicModel.getAllSongs();
                 tblAllSongs.setItems(sngList);
@@ -166,29 +158,25 @@ public class MainViewController implements Initializable
                         new PropertyValueFactory("title"));
                 tblAllSongsArtist.setCellValueFactory(
                         new PropertyValueFactory("artist"));
-              }
-            if (!musicModel.loadAllPlaylists().isEmpty())
-              {
+            }
+            if (!musicModel.loadAllPlaylists().isEmpty()) {
                 updateSongsPlaylist();
-              }
-            if (!musicModel.loadAllPlaylists().isEmpty())
-              {
+            }
+            if (!musicModel.loadAllPlaylists().isEmpty()) {
                 ObservableList<Playlist> pList
                         = FXCollections.observableArrayList(musicModel.loadAllPlaylists());
                 tblPlaylist.setItems(pList);
                 clmPlaylist.setCellValueFactory(
                         new PropertyValueFactory("name"));
 
-              }
-          } catch (IOException ex)
-          {
+            }
+        } catch (IOException ex) {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-          }
-      }
+        }
+    }
 
     @FXML
-    private void delete(ActionEvent event)
-      {
+    private void delete(ActionEvent event) {
 //        
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Delete");
@@ -196,115 +184,90 @@ public class MainViewController implements Initializable
         alert.setContentText(contentDeleteText());
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK)
-          {
+        if (result.get() == ButtonType.OK) {
             MusicModel musicModel = MusicModel.getMusicModel();
-            if (lastClicked == ALL_SONGS)
-          {
-            Music music = tblAllSongs.getSelectionModel().getSelectedItem();
-            musicModel.removeSong(music);
+            if (lastClicked == ALL_SONGS) {
+                Music music = tblAllSongs.getSelectionModel().getSelectedItem();
+                musicModel.removeSong(music);
 
-          } else if (lastClicked == SONGS_ON_PLAYLIST)
-          {
-            Music music = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
-            
+            } else if (lastClicked == SONGS_ON_PLAYLIST) {
+                Music music = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
 
-          } else if (lastClicked == PLAYLIST)
-          {
-            Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
-           
-          }
-          } 
+            } else if (lastClicked == PLAYLIST) {
+                Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
 
-      }
+            }
+        }
 
-    private String contentDeleteText()
-      {
-        if (lastClicked == ALL_SONGS)
-          {
+    }
+
+    private String contentDeleteText() {
+        if (lastClicked == ALL_SONGS) {
             Music music = tblAllSongs.getSelectionModel().getSelectedItem();
             System.out.println("ALLSONGS");
             return music.getTitle();
 
-          } else if (lastClicked == SONGS_ON_PLAYLIST)
-          {
+        } else if (lastClicked == SONGS_ON_PLAYLIST) {
             Music music = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
             System.out.println("SONGS ON PLAYLIST");
             return music.getTitle();
 
-          } else if (lastClicked == PLAYLIST)
-          {
+        } else if (lastClicked == PLAYLIST) {
             Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
             System.out.println("PLAYLIST");
             return playlist.getName();
-          } else
-          {
-            return "Sorry, nothing was selected"; 
-                
-            
-          }
+        } else {
+            return "Sorry, nothing was selected";
 
-      }
+        }
+
+    }
 
     @FXML
-    private void prev(ActionEvent event)
-      {
-      }
+    private void play(ActionEvent event) {
+        playSong();
 
-    @FXML
-    private void play(ActionEvent event)
-      {
-        if (mp == null)
-          {
+    }
+
+    private void playSong() {
+        if (mp == null) {
             SongSelected();
-          }
+        }
         Status status = mp.getStatus();
         System.out.println(mp.getStatus());
         if (status == Status.PAUSED
                 || status == Status.READY
                 || status == Status.STOPPED
-                || status == Status.UNKNOWN)
-          {
+                || status == Status.UNKNOWN) {
             btnPlayPause.setText("Pause");
             mp.play();
 
             System.out.println("should be playing");
-          } else
-          {
+        } else {
             btnPlayPause.setText("Play");
             mp.pause();
-          }
-
-      }
-
-    private Music selectedSong()
-      {
-        return tblAllSongs.getSelectionModel().getSelectedItem();
-      }
+        }
+    }
 
     @FXML
-    private void AddSongToPlaylist(ActionEvent event)
-      {
+    private void AddSongToPlaylist(ActionEvent event) {
         Playlist p;
 
         p = tblPlaylist.getSelectionModel().getSelectedItem();
         Music m;
         m = tblAllSongs.getSelectionModel().getSelectedItem();
-        if (m != null && p != null)
-          {
+        if (m != null && p != null) {
             p.addSong(m);
             updateSongsPlaylist();
             MusicModel musicModel = MusicModel.getMusicModel();
             musicModel.savePlaylist(p);
-          }
-      }
+        }
+    }
 
-    private void updateSongsPlaylist()
-      {
+    private void updateSongsPlaylist() {
         Playlist p = null;
         p = tblPlaylist.getSelectionModel().getSelectedItem();
-        if (p != null)
-          {
+        if (p != null) {
             ObservableList<Music> plSongList
                     = FXCollections.observableArrayList(p.getPlaylist());
             tblSongsOnPlaylist.setItems(plSongList);
@@ -312,42 +275,37 @@ public class MainViewController implements Initializable
                     new PropertyValueFactory("title"));
             tblSongsOnPlaylistArtist.setCellValueFactory(
                     new PropertyValueFactory("artist"));
-          }
+        }
 
-      }
+    }
 
     @FXML
-    private void PlaylistUpdate(MouseEvent event)
-      {
+    private void PlaylistUpdate(MouseEvent event) {
         updateSongsPlaylist();
         lastClicked = 3;
         System.out.println(lastClicked + "");
-      }
+    }
 
     @FXML
-    private void songsInPlaylistUpdate(MouseEvent event)
-      {
+    private void songsInPlaylistUpdate(MouseEvent event) {
         lastClicked = 1;
         System.out.println(lastClicked + "");
-      }
+    }
 
     @FXML
-    private void songsUpdate(MouseEvent event)
-      {
+    private void songsUpdate(MouseEvent event) {
         lastClicked = 2;
         System.out.println(lastClicked + "");
-      }
+    }
 
-    private void SongSelected()
-      {
-        if (lastClicked == 0 || lastClicked == PLAYLIST)
-          {
+    private void SongSelected() {
+        if (lastClicked == 0 || lastClicked == PLAYLIST) {
 
-          }
-        if (lastClicked == SONGS_ON_PLAYLIST)
-          {
-
-            Music music = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
+        }
+        if (lastClicked == SONGS_ON_PLAYLIST) {
+            songPlaying = tblSongsOnPlaylist.getSelectionModel().getSelectedIndex();
+            currentlyPlaying.addAll(tblSongsOnPlaylist.getItems());
+            Music music = currentlyPlaying.get(songPlaying);
             String path = music.getPath();
             lblCurrentSong.setText("Song: "
                     + music.getTitle()
@@ -356,10 +314,12 @@ public class MainViewController implements Initializable
             Media media = new Media(new File(path).toURI().toString());
             mp = new MediaPlayer(media);
 
-          }
-        if (lastClicked == ALL_SONGS)
-          {
-            Music music = tblAllSongs.getSelectionModel().getSelectedItem();
+        }
+        if (lastClicked == ALL_SONGS) {
+
+            currentlyPlaying.addAll(tblAllSongs.getItems());
+            songPlaying = tblAllSongs.getSelectionModel().getSelectedIndex();
+            Music music = currentlyPlaying.get(songPlaying);
             String path = music.getPath();
             lblCurrentSong.setText("Song: "
                     + music.getTitle()
@@ -368,27 +328,23 @@ public class MainViewController implements Initializable
             Media media = new Media(new File(path).toURI().toString());
             mp = new MediaPlayer(media);
 
-          }
-      }
+        }
+    }
 
     @FXML
-    private void editPlaylist(ActionEvent event)
-      {
-        if (lastClicked == PLAYLIST )
-          {
+    private void editPlaylist(ActionEvent event) {
+        if (lastClicked == PLAYLIST) {
             Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
             System.out.println("EDITPLAYLIST");
 
             Stage primaryStage = (Stage) btnNewSong.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/assignment4mytunes/GUI/View/EditPlaylist.fxml"));
             Parent root = null;
-            try
-              {
+            try {
                 root = loader.load();
-              } catch (IOException ex)
-              {
+            } catch (IOException ex) {
                 Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-              }
+            }
             Stage subStage = new Stage();
             subStage.setScene(new Scene(root));
             MusicModel musicModel = MusicModel.getMusicModel();
@@ -401,20 +357,67 @@ public class MainViewController implements Initializable
                     = loader.getController();
             editPlaylistViewController.setTxtName(playlist);
 
-          }
+        }
 
-      }
-
-    @FXML
-    private void next(ActionEvent event)
-      {
-      }
+    }
 
     @FXML
-    private void editSong(ActionEvent event)
-      {
+    private void next(ActionEvent event) {
+        if (mp != null) {
+            mp.stop();
+            System.out.println("does nothing");
+            if (songPlaying < currentlyPlaying.size() - 1) {
+                songPlaying++;
+
+                System.out.println("reaches here?");
+
+            } else {
+                songPlaying = 0;
+                System.out.println("Does this when reaching the end");
+            }
+            Music music = currentlyPlaying.get(songPlaying);
+            String path = music.getPath();
+            lblCurrentSong.setText("Song: "
+                    + music.getTitle()
+                    + " Artist: "
+                    + music.getArtist());
+            Media media = new Media(new File(path).toURI().toString());
+            mp = new MediaPlayer(media);
+            playSong();
+        }
+    }
+
+    @FXML
+    private void prev(ActionEvent event) {
+        if (mp != null) {
+            mp.stop();
+            System.out.println("does nothing");
+            if (songPlaying > 0) {
+                songPlaying--;
+
+                System.out.println("reaches here?");
+
+            } else {
+                songPlaying = currentlyPlaying.size() - 1;
+                System.out.println("Does this when reaching the end");
+            }
+            Music music = currentlyPlaying.get(songPlaying);
+            String path = music.getPath();
+            lblCurrentSong.setText("Song: "
+                    + music.getTitle()
+                    + " Artist: "
+                    + music.getArtist());
+            Media media = new Media(new File(path).toURI().toString());
+            mp = new MediaPlayer(media);
+            playSong();
+        }
+    }
+
+    @FXML
+    private void editSong(ActionEvent event
+    ) {
         if (lastClicked == ALL_SONGS)//checks which table is selected
-          {
+        {
             Music music = tblAllSongs.getSelectionModel().getSelectedItem();
             System.out.println("THIS SONG IS SELECTED");
 
@@ -422,13 +425,11 @@ public class MainViewController implements Initializable
             Stage primaryStage = (Stage) btnNewSong.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/assignment4mytunes/GUI/View/AddMusic.fxml"));
             Parent root = null;
-            try
-              {
+            try {
                 root = loader.load();
-              } catch (IOException ex)
-              {
+            } catch (IOException ex) {
                 Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-              }
+            }
             Stage subStage = new Stage();
             subStage.setScene(new Scene(root));
             MusicModel musicModel = MusicModel.getMusicModel();
@@ -445,7 +446,7 @@ public class MainViewController implements Initializable
             addMusicController.setArtist(music);
             addMusicController.setTime(music);
             addMusicController.setFile(music);
-          }
+        }
 
-      }
+    }
 }
