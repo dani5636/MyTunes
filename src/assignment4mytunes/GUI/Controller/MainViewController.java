@@ -177,7 +177,7 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void delete(ActionEvent event) {
-//        
+
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Delete");
         alert.setHeaderText("Are you sure you want to delete the following?");
@@ -195,7 +195,8 @@ public class MainViewController implements Initializable {
 
             } else if (lastClicked == PLAYLIST) {
                 Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
-
+                musicModel.removePlaylist(playlist);
+                updater();
             }
         }
 
