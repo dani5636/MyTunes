@@ -204,7 +204,11 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void play(ActionEvent event) {
-        playSong();
+        if (!tblAllSongs.getSelectionModel().isEmpty() || !tblSongsOnPlaylist.getSelectionModel().isEmpty()) {
+            playSong();
+        } else {
+            btnPlayPause.setSelected(false);
+        }
 
     }
 
@@ -548,7 +552,10 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void Stop(ActionEvent event) {
+
         if (mp != null) {
+            btnPlayPause.setSelected(false);
+            btnPlayPause.setText("Play");
             mp.stop();
             mp = null;
         }

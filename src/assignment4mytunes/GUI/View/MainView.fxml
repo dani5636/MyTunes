@@ -22,7 +22,7 @@
                         <HBox alignment="CENTER" prefHeight="82.0" prefWidth="203.0" spacing="15.0">
                             <children>
                                 <Button mnemonicParsing="false" onAction="#prev" text="Prev." />
-                                <ToggleButton fx:id="btnPlayPause" mnemonicParsing="false" onAction="#play" prefHeight="23.0" prefWidth="47.0" text="Play" />
+                                <ToggleButton fx:id="btnPlayPause" mnemonicParsing="false" onAction="#play" prefHeight="31.0" prefWidth="66.0" text="Play" />
                                 <Button mnemonicParsing="false" onAction="#next" text="Next" />
                             </children>
                         </HBox>
