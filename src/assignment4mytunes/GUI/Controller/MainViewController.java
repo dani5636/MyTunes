@@ -101,6 +101,8 @@ public class MainViewController implements Initializable {
 
     private int songPlaying;
     private ArrayList<Music> currentlyPlaying = new ArrayList();
+
+    
     private int lastClicked;
     MediaPlayer mp = null;
 
@@ -130,7 +132,8 @@ public class MainViewController implements Initializable {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    
     private void windowloader(String p) throws IOException {
         Stage primaryStage = (Stage) btnNewSong.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(p));
@@ -185,8 +188,17 @@ public class MainViewController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            MusicModel musicModel = MusicModel.getMusicModel();
-            if (lastClicked == ALL_SONGS) {
+            doDelete();
+        }
+
+    }
+    
+    public void doDelete()
+      {
+        
+      
+      MusicModel musicModel = MusicModel.getMusicModel();
+        if (lastClicked == ALL_SONGS) {
                 Music music = tblAllSongs.getSelectionModel().getSelectedItem();
                 musicModel.removeSong(music);
 
@@ -202,9 +214,7 @@ public class MainViewController implements Initializable {
                 musicModel.removePlaylist(playlist);
                 updater();
             }
-        }
-
-    }
+      }
 
     private String contentDeleteText() {
         if (lastClicked == ALL_SONGS) {

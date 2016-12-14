@@ -113,10 +113,14 @@ public final class MusicModel {
     
     public void removePlaylist(Playlist playlist){
         pManager.removePlaylist(playlist);
-        
-        //TODO remove the playlist from view
-        
+      
     }
+    
+    public void renamePlaylist(Playlist playlist)
+      {
+        pManager.renamePlaylist(playlist);
+      }
+    
 
     public ObservableList<Music> getAllSongs()
       {
