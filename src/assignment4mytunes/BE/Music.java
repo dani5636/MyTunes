@@ -66,4 +66,7 @@ public class Music {
         this.title = title;
     }
 
+    public String getAllMusicStringInfo() {
+        return title + " " + artist + " " + genre;
+    }
 }

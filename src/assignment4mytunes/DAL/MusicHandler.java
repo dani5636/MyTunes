@@ -30,8 +30,11 @@ public class MusicHandler {
     public void saveMusic(Music song) {
         String mscString = "";
         String fileName = song.getTitle() + ".sng";
+
         File file = new File("DATA/Songs/" + fileName);
+
         System.out.println(file.getAbsolutePath());
+
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -62,6 +65,10 @@ public class MusicHandler {
     }
 
     public List<Music> loadAllMusic() throws IOException {
+        File dir1 = new File("DATA/Songs");
+        if (!dir1.exists()) {
+            dir1.mkdir();
+        }
         List<Music> allSongs = new ArrayList<>();
         Path dir = Paths.get("DATA/Songs/");
         try (DirectoryStream<Path> stream
@@ -88,9 +95,8 @@ public class MusicHandler {
         }
         return allSongs;
     }
-    
-    public void removeSong(Music song)
-      {
+
+    public void removeSong(Music song) {
         String fileName = song.getTitle() + ".sng";
         File file = new File("DATA/Songs/" + fileName);
         if (file.exists()) {
@@ -100,5 +106,6 @@ public class MusicHandler {
     
    
        
+    }
 
-}
+
