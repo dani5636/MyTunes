@@ -40,8 +40,7 @@ import javafx.stage.Stage;
  *
  * @author Mecaa
  */
-public class AddMusicController implements Initializable
-{
+public class AddMusicController implements Initializable {
 
     @FXML
     private TextField txtTitle;
@@ -57,31 +56,24 @@ public class AddMusicController implements Initializable
     @FXML
     private Button btnGenre;
 
-    private Music thisTitle;
-    private Music thisArtist;
-    private Music thisGenre;
-    private Music thisTime;
-    private Music thisFile;
+    private Music editMusic = null;
     private MusicModel musicModel;
 
-    public AddMusicController()
-      {
+    public AddMusicController() {
 
-      }
+    }
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-      {
+    public void initialize(URL url, ResourceBundle rb) {
         updateGenres();
 
-      }
+    }
 
     @FXML
-    private void AddGenres(ActionEvent event) throws IOException
-      {
+    private void AddGenres(ActionEvent event) throws IOException {
         Stage primaryStage = (Stage) btnGenre.getScene().getWindow();
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("/assignment4mytunes/GUI/View/AddGenre.fxml"));
@@ -95,11 +87,10 @@ public class AddMusicController implements Initializable
         subStage.initModality(Modality.WINDOW_MODAL);
         subStage.initOwner(primaryStage);
         subStage.show();
-      }
+    }
 
     @FXML
-    private void FindFile(ActionEvent event)
-      {
+    private void FindFile(ActionEvent event) {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Find your music!");
@@ -107,41 +98,38 @@ public class AddMusicController implements Initializable
         fileChooser.getExtensionFilters().add(extFilter);
         fileChooser.setInitialDirectory(new File("DATA\\DemoSongs"));
         File file = fileChooser.showOpenDialog(null);
-        if (file != null)
-          {
+        if (file != null) {
             String path = file.getAbsolutePath();
             path = path.replace("\\", "/");
             txtTitle.setText(file.getName());
             txtPath.setText(path);
             getDuration();
-          }
-      }
+        }
+    }
 
     @FXML
-    private void CancelMusic(ActionEvent event)
-      {
+    private void CancelMusic(ActionEvent event) {
         Stage stage = (Stage) txtPath.getScene().getWindow();
         stage.close();
-      }
+    }
 
     @FXML
-    private void Save(ActionEvent event)
-      {
-        if (!txtArtist.getText().isEmpty() && !txtPath.getText().isEmpty() && !txtTime.getText().isEmpty() && !txtTitle.getText().isEmpty() && !choiceGenre.getSelectionModel().getSelectedItem().isEmpty())
-          {
-            
+    private void Save(ActionEvent event) {
+        if (editMusic != null) {
+            musicModel = MusicModel.getMusicModel();
+            MainViewController mainView = musicModel.getMainView();
+            mainView.doDelete();
+        }
+        if (!txtArtist.getText().isEmpty() && !txtPath.getText().isEmpty() && !txtTime.getText().isEmpty() && !txtTitle.getText().isEmpty() && !choiceGenre.getSelectionModel().getSelectedItem().isEmpty()) {
 
-            try
-              {
+            try {
                 getTextAndAddSong();
 
-              } catch (IOException ex)
-              {
+            } catch (IOException ex) {
 
-              }
+            }
 
-          }
-        else {
+        } else {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Error");
             alert.setHeaderText("Error");
@@ -149,59 +137,50 @@ public class AddMusicController implements Initializable
 
             alert.showAndWait();
         }
-      }
+    }
 
-    public void deleteSong()
-      {
+    public void deleteSong() {
 
         MainViewController mainView = musicModel.getMainView();
         mainView.doDelete();
 
-      }
+    }
 
-    public void updateGenres()
-      {
+    public void updateGenres() {
         MusicModel musicModel = MusicModel.getMusicModel();
         ObservableList<String> genres = null;
-        try
-          {
+        try {
             genres = FXCollections.observableArrayList(musicModel.loadGenre());
-          } catch (IOException ex)
-          {
+        } catch (IOException ex) {
             Logger.getLogger(AddMusicController.class.getName()).log(Level.SEVERE, null, ex);
-          }
+        }
         choiceGenre.setItems(genres);
-      }
+    }
 
-    public void getDuration()
-      {
+    public void getDuration() {
         File filestring = new File(txtPath.getText());
         Media file = new Media(filestring.toURI().toString());
 
         MediaPlayer mediaPlayer = new MediaPlayer(file);
 
-        mediaPlayer.setOnReady(new Runnable()
-        {
+        mediaPlayer.setOnReady(new Runnable() {
 
             @Override
-            public void run()
-              {
+            public void run() {
                 int minutes = (int) file.getDuration().toSeconds() / 60;
                 int calculation = minutes * 60;
                 int seconds = (int) file.getDuration().toSeconds() - calculation;
                 txtTime.setText(String.valueOf(minutes + ":" + seconds));
-              }
+            }
         });
-      }
+    }
 
-    public void getTextAndAddSong() throws IOException
-      {
+    public void getTextAndAddSong() throws IOException {
         String name = txtTitle.getText();
         String artist = txtArtist.getText();
         String genre = choiceGenre.getSelectionModel().getSelectedItem();
         String duration = txtTime.getText();
         String path = txtPath.getText();
-        //path = path.replace(" ", "%20");
         path = path.replace("\\", "/");
         MusicModel musicModel = MusicModel.getMusicModel();
         Music song = new Music(name, artist, genre, path, duration);
@@ -214,36 +193,16 @@ public class AddMusicController implements Initializable
         Stage stage = (Stage) txtPath.getScene().getWindow();
         stage.close();
 
-      }
+    }
 
-    public void setTitle(Music title)
-      {
-        thisTitle = title;
-        txtTitle.setText(thisTitle.getTitle());
-      }
+    public void setSong(Music song) {
+        editMusic = song;
+        txtArtist.setText(editMusic.getArtist());
+        txtTitle.setText(editMusic.getTitle());
+        txtTime.setText(editMusic.getTime());
+        txtPath.setText(editMusic.getPath());
+        choiceGenre.getSelectionModel().select(editMusic.getGenre());
 
-    public void setArtist(Music artist)
-      {
-        thisArtist = artist;
-        txtArtist.setText(thisArtist.getArtist());
-      }
-
-    public void setGenre(Music genre)
-      {
-        thisGenre = genre;
-
-      }
-
-    public void setTime(Music time)
-      {
-        thisTime = time;
-        txtTime.setText(thisTime.getTime());
-      }
-
-    public void setFile(Music file)
-      {
-        thisFile = file;
-        txtPath.setText(thisFile.getPath());
-      }
+    }
 
 }

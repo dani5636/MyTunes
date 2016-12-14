@@ -21,9 +21,8 @@ import javafx.stage.Stage;
  *
  * @author gudla
  */
-public class EditPlaylistController implements Initializable
-{
-
+public class EditPlaylistController implements Initializable {
+    
     @FXML
     private Button btnSave;
     @FXML
@@ -37,41 +36,33 @@ public class EditPlaylistController implements Initializable
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-      {
+    public void initialize(URL url, ResourceBundle rb) {
         // TODO
-      }    
+    }
     
-    public void setTxtName(Playlist playlist)
-      {
+    public void setTxtName(Playlist playlist) {
         namePlaylist = playlist;
         txtName.setText(namePlaylist.getName());
-      }
-
+    }
     
-
     @FXML
-    private void clickSave(ActionEvent event)
-      {
+    private void clickSave(ActionEvent event) {
+        
         musicModel = MusicModel.getMusicModel();
-        musicModel.newPlaylist(txtName.getText());
-        musicModel.renamePlaylist(namePlaylist);
         MainViewController mainView = musicModel.getMainView();
         mainView.doDelete();
+        namePlaylist.setName(txtName.getText());
+        musicModel.savePlaylist(namePlaylist);
         mainView.updater();
         Stage stage = (Stage) txtName.getScene().getWindow();
         stage.close();
         
-      }
-
+    }
+    
     @FXML
-    private void clickCancel(ActionEvent event)
-      {
+    private void clickCancel(ActionEvent event) {
         Stage stage = (Stage) txtName.getScene().getWindow();
         stage.close();
-      }
-    
-    
-    
+    }
     
 }

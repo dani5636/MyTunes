@@ -69,8 +69,6 @@ public class MainViewController implements Initializable {
     @FXML
     private TextField textFieldFilter;
     @FXML
-    private Button btnFilterSearch;
-    @FXML
     private Button btnNewSong;
     @FXML
     private Button btnEditSong;
@@ -112,6 +110,10 @@ public class MainViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         updater();
 
+        MusicModel musicModel = MusicModel.getMusicModel();
+
+        musicModel.setMainView(this);
+
         // bindPlayerToGUI();
         // TOD
     }
@@ -120,7 +122,6 @@ public class MainViewController implements Initializable {
     private void newMusic(ActionEvent event) {
         try {
             windowloader("/assignment4mytunes/GUI/View/AddMusic.fxml");
-
         } catch (IOException ex) {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -189,23 +190,7 @@ public class MainViewController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            MusicModel musicModel = MusicModel.getMusicModel();
-            if (lastClicked == ALL_SONGS) {
-                Music music = tblAllSongs.getSelectionModel().getSelectedItem();
-                musicModel.removeSong(music);
-
-            } else if (lastClicked == SONGS_ON_PLAYLIST) {
-                int index = tblSongsOnPlaylist.getSelectionModel().getSelectedIndex();
-                Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
-                playlist.removeSong(index);
-                musicModel.savePlaylist(playlist);
-                updateSongsPlaylist();
-
-            } else if (lastClicked == PLAYLIST) {
-                Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
-                musicModel.removePlaylist(playlist);
-                updater();
-            }
+            doDelete();
         }
 
     }
@@ -298,6 +283,27 @@ public class MainViewController implements Initializable {
 
     }
 
+    public void doDelete() {
+
+        MusicModel musicModel = MusicModel.getMusicModel();
+        if (lastClicked == ALL_SONGS) {
+            Music music = tblAllSongs.getSelectionModel().getSelectedItem();
+            musicModel.removeSong(music);
+
+        } else if (lastClicked == SONGS_ON_PLAYLIST) {
+            int index = tblSongsOnPlaylist.getSelectionModel().getSelectedIndex();
+            Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
+            playlist.removeSong(index);
+            musicModel.savePlaylist(playlist);
+            updateSongsPlaylist();
+
+        } else if (lastClicked == PLAYLIST) {
+            Playlist playlist = tblPlaylist.getSelectionModel().getSelectedItem();
+            musicModel.removePlaylist(playlist);
+            updater();
+        }
+    }
+
     @FXML
     private void PlaylistUpdate(MouseEvent event) {
         updateSongsPlaylist();
@@ -367,8 +373,6 @@ public class MainViewController implements Initializable {
             }
             Stage subStage = new Stage();
             subStage.setScene(new Scene(root));
-            MusicModel musicModel = MusicModel.getMusicModel();
-            musicModel.setMainView(this);
             subStage.initModality(Modality.WINDOW_MODAL);
             subStage.initOwner(primaryStage);
             subStage.show();
@@ -510,10 +514,7 @@ public class MainViewController implements Initializable {
             AddMusicController addMusicController
                     = loader.getController();
 
-            addMusicController.setTitle(music);
-            addMusicController.setArtist(music);
-            addMusicController.setTime(music);
-            addMusicController.setFile(music);
+            addMusicController.setSong(tblAllSongs.getSelectionModel().getSelectedItem());
         }
 
     }
@@ -559,6 +560,14 @@ public class MainViewController implements Initializable {
         }
         return searchList;
 
+    }
+
+    @FXML
+    private void Stop(ActionEvent event) {
+        if (mp != null) {
+            mp.stop();
+            mp = null;
+        }
     }
 
     private class endOfSongEvent implements Runnable {

@@ -38,7 +38,6 @@ public class PlaylistHandler {
     }
 
     public void savePlaylist(Playlist p) {
-        p.getName();
         fileName = p.getName() + ".pll";
         File file = new File("DATA/Playlist/" + fileName);
         System.out.println(file.getAbsolutePath());

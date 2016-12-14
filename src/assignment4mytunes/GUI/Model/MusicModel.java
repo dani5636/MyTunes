@@ -5,7 +5,6 @@
  */
 package assignment4mytunes.GUI.Model;
 
-
 import assignment4mytunes.BE.Music;
 import assignment4mytunes.BE.Playlist;
 import assignment4mytunes.BLL.GenreManager;
@@ -31,31 +30,27 @@ public final class MusicModel {
     private PlaylistManager pManager = new PlaylistManager();
     private MusicManager musicManager = new MusicManager();
     private MainViewController mainView = null;
-    
+
     private final ObservableList<Music> thisMusic;
     private final ObservableList<Playlist> thisPlaylist;
 
-    private MusicModel()  {
+    private MusicModel() {
         thisMusic = FXCollections.observableArrayList();
-        try
-          {
-           
+        try {
+
             thisMusic.addAll(musicManager.loadAllMusic());
-          } catch (IOException ex)
-          {
+        } catch (IOException ex) {
             Logger.getLogger(MusicModel.class.getName()).log(Level.SEVERE, null, ex);
-          }
-        
+        }
+
         thisPlaylist = FXCollections.observableArrayList();
-        try
-          {
+        try {
             thisPlaylist.addAll(pManager.loadAllPlaylists());
-            
-          } catch (IOException ex)
-          {
+
+        } catch (IOException ex) {
             Logger.getLogger(MusicModel.class.getName()).log(Level.SEVERE, null, ex);
-          }
-        
+        }
+
     }
 
     public static MusicModel getMusicModel() {
@@ -80,10 +75,6 @@ public final class MusicModel {
 
     }
 
-    public void newPlaylist(String name) {
-        pManager.newPlaylist(new Playlist(name));
-    }
-
     public ArrayList<Playlist> loadAllPlaylists() throws IOException {
         return pManager.loadAllPlaylists();
     }
@@ -101,39 +92,29 @@ public final class MusicModel {
         this.mainView = mainView;
     }
 
-    public void removeSong(Music music)
-      {
-        
-        musicManager.removeMusic(music);
-        
-        thisMusic.remove(music);
-        
-          
-      }
-    
-    public void removePlaylist(Playlist playlist){
-        pManager.removePlaylist(playlist);
-      
-    }
-    
-    public void renamePlaylist(Playlist playlist)
-      {
-        pManager.renamePlaylist(playlist);
-      }
-    
+    public void removeSong(Music music) {
 
-    public ObservableList<Music> getAllSongs()
-      {
-       return thisMusic;
-      }
-    
-    public ObservableList<Playlist> getAllPlaylist()
-      {
+        musicManager.removeMusic(music);
+
+        thisMusic.remove(music);
+
+    }
+
+    public void removePlaylist(Playlist playlist) {
+        pManager.removePlaylist(playlist);
+
+    }
+
+    public void renamePlaylist(Playlist playlist) {
+        pManager.renamePlaylist(playlist);
+    }
+
+    public ObservableList<Music> getAllSongs() {
+        return thisMusic;
+    }
+
+    public ObservableList<Playlist> getAllPlaylist() {
         return thisPlaylist;
-      }
-    
-    
-    
-    
+    }
 
 }

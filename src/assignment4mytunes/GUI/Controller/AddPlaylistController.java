@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  * @author gudla
  */
 public class AddPlaylistController implements Initializable {
-
+    
     @FXML
     private TextField txtName;
     @FXML
@@ -33,17 +33,17 @@ public class AddPlaylistController implements Initializable {
     private Button btnSave;
     private Playlist playlist;
     private MusicModel musicModel;
-
+    
     public AddPlaylistController(Playlist playlist) {
         this.playlist = playlist;
     }
-
+    
     public Playlist getPlaylist() {
         return playlist;
     }
-
+    
     public AddPlaylistController() {
-
+        
     }
 
     /**
@@ -53,23 +53,23 @@ public class AddPlaylistController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
+    
     @FXML
     private void clickSave(ActionEvent event) {
         musicModel = MusicModel.getMusicModel();
-        musicModel.newPlaylist(txtName.getText());
+        musicModel.savePlaylist(new Playlist(txtName.getText()));
         MainViewController mainView = musicModel.getMainView();
         mainView.updater();
         Stage stage = (Stage) txtName.getScene().getWindow();
         stage.close();
-
+        
     }
-
+    
     @FXML
     private void CancelPlaylist(ActionEvent event) {
-
+        
         Stage stage = (Stage) txtName.getScene().getWindow();
         stage.close();
     }
-
+    
 }

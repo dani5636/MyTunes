@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="496.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment4mytunes.GUI.Controller.MainViewController">
     <children>
@@ -21,7 +22,7 @@
                         <HBox alignment="CENTER" prefHeight="82.0" prefWidth="203.0" spacing="15.0">
                             <children>
                                 <Button fx:id="btnPrevSong" mnemonicParsing="false" onAction="#prev" text="Prev." />
-                                <ToggleButton fx:id="btnPlayPause" mnemonicParsing="false" onAction="#play" text="Play" />
+                                <ToggleButton fx:id="btnPlayPause" mnemonicParsing="false" onAction="#play" prefHeight="23.0" prefWidth="47.0" text="Play" />
                                 <Button mnemonicParsing="false" onAction="#next" text="Next" />
                             </children>
                         </HBox>
@@ -34,6 +35,11 @@
                 </HBox>
                 <VBox alignment="CENTER" prefHeight="40.0" prefWidth="300.0">
                     <children>
+                  <Button mnemonicParsing="false" onAction="#Stop" prefHeight="25.0" prefWidth="42.0" text="Stop">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Button>
                         <Label alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="198.0" text="Playlists:" />
                     </children>
                 </VBox>
@@ -63,7 +69,7 @@
         </VBox>
         <VBox layoutX="232.0" layoutY="11.0" prefHeight="460.0" prefWidth="285.0">
             <children>
-                <HBox alignment="CENTER" prefHeight="94.0" prefWidth="300.0">
+                <HBox alignment="CENTER" prefHeight="89.0" prefWidth="285.0">
                     <children>
                         <Label fx:id="lblCurrentSong" text="(None) ... is playing" />
                     </children>
