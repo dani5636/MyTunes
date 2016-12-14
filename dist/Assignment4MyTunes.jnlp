@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Assignment4MyTunes.jnlp">
+  <information>
+    <title>Assignment4MyTunes</title>
+    <vendor>Mecaa</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Assignment4MyTunes.jar" size="37927" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Assignment4MyTunes" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="assignment4mytunes.app"  name="Assignment4MyTunes" />
+  <update check="always"/>
+</jnlp>
