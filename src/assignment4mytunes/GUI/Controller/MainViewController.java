@@ -51,29 +51,7 @@ import javafx.stage.Stage;
 public class MainViewController implements Initializable {
 
     @FXML
-    private Button btnPrevSong;
-    @FXML
-    private Slider volumeSlider;
-    @FXML
-    private Button btnNewPlaylist;
-    @FXML
-    private Button btnEditPlaylist;
-    @FXML
-    private Label lblCurrentSong;
-    @FXML
-    private Button btnMoveUpSong;
-    @FXML
-    private Button btnMoveDownSong;
-    @FXML
-    private Button btnDeleteSong;
-    @FXML
     private TextField textFieldFilter;
-    @FXML
-    private Button btnNewSong;
-    @FXML
-    private Button btnEditSong;
-    @FXML
-    private Button btnCloseProgram;
     @FXML
     private TableView<Music> tblSongsOnPlaylist;
     @FXML
@@ -94,7 +72,14 @@ public class MainViewController implements Initializable {
     private TableColumn<Playlist, ?> clmTime;
     @FXML
     private ToggleButton btnPlayPause;
-
+    @FXML
+    private Slider volumeSlider;
+    @FXML
+    private Label lblCurrentSong;
+    @FXML
+    private Button btnNewSong;
+    @FXML
+    private Button btnEditSong;
     public static final int SONGS_ON_PLAYLIST = 1;
     public static final int ALL_SONGS = 2;
     public static final int PLAYLIST = 3;
@@ -484,8 +469,7 @@ public class MainViewController implements Initializable {
     }
 
     @FXML
-    private void editSong(ActionEvent event
-    ) {
+    private void editSong(ActionEvent event) {
         if (lastClicked == ALL_SONGS)//checks which table is selected
         {
             Music music = tblAllSongs.getSelectionModel().getSelectedItem();
@@ -570,6 +554,51 @@ public class MainViewController implements Initializable {
         }
     }
 
+    @FXML
+    private void closeProgram(ActionEvent event) {
+        Stage stage = (Stage) lblCurrentSong.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void PlaylistUp(ActionEvent event) {
+        if (!tblPlaylist.getSelectionModel().isEmpty() && !tblSongsOnPlaylist.getSelectionModel().isEmpty()) {
+            movingSongsOnPlaylist(-1);
+        }
+    }
+
+    @FXML
+    private void playlistDown(ActionEvent event) {
+        if (!tblPlaylist.getSelectionModel().isEmpty() && !tblSongsOnPlaylist.getSelectionModel().isEmpty()) {
+            movingSongsOnPlaylist(+1);
+        }
+    }
+
+    private void movingSongsOnPlaylist(int direction) {
+
+        int pos = tblSongsOnPlaylist.getSelectionModel().getSelectedIndex();
+        if (pos + direction != -1 && pos + direction != tblSongsOnPlaylist.getItems().size()) {
+            Playlist p = tblPlaylist.getSelectionModel().getSelectedItem();
+            ArrayList<Music> songList = p.getPlaylist();
+            Music music = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            songList.remove(pos);
+            songList.add(pos + direction, music);
+
+            MusicModel musicModel = MusicModel.getMusicModel();
+            musicModel.savePlaylist(p);
+            updateSongsPlaylist();
+        }
+
+    }
+
+    /* public static void moveLastup(String[] arr, int pos) {
+        String last = arr[arr.length - 1];
+
+        // Copy sub-array starting at pos to pos+1
+        System.arraycopy(arr, pos, arr, pos + 1, arr.length - pos - 1);
+
+        arr[pos] = last;
+    }*/
     private class endOfSongEvent implements Runnable {
 
         public void run() {

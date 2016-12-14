@@ -38,6 +38,9 @@ public class Playlist {
 
     public void removeSong(int index) {
         playlist.remove(index);
+    }
+
+    public void setArray(ArrayList<Music> songs) {
 
     }
 }

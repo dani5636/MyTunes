@@ -21,7 +21,7 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="82.0" prefWidth="203.0" spacing="15.0">
                             <children>
-                                <Button fx:id="btnPrevSong" mnemonicParsing="false" onAction="#prev" text="Prev." />
+                                <Button mnemonicParsing="false" onAction="#prev" text="Prev." />
                                 <ToggleButton fx:id="btnPlayPause" mnemonicParsing="false" onAction="#play" prefHeight="23.0" prefWidth="47.0" text="Play" />
                                 <Button mnemonicParsing="false" onAction="#next" text="Next" />
                             </children>
@@ -58,8 +58,8 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="39.0" prefWidth="300.0" spacing="10.0">
                     <children>
-                        <Button fx:id="btnNewPlaylist" mnemonicParsing="false" onAction="#newPlaylist" text="New..." />
-                        <Button fx:id="btnEditPlaylist" mnemonicParsing="false" onAction="#editPlaylist" text="Edit..." />
+                        <Button mnemonicParsing="false" onAction="#newPlaylist" text="New..." />
+                        <Button mnemonicParsing="false" onAction="#editPlaylist" text="Edit..." />
                     </children>
                 </HBox>
             </children>
@@ -91,8 +91,8 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="38.0" prefWidth="300.0" spacing="10.0">
                     <children>
-                        <Button fx:id="btnMoveUpSong" mnemonicParsing="false" text="^" />
-                        <Button fx:id="btnMoveDownSong" mnemonicParsing="false" text="v" />
+                        <Button mnemonicParsing="false" onAction="#PlaylistUp" text="^" />
+                        <Button mnemonicParsing="false" onAction="#playlistDown" text="v" />
                     </children>
                 </HBox>
             </children>
@@ -139,7 +139,7 @@
                 <Button mnemonicParsing="false" onAction="#AddSongToPlaylist" prefHeight="31.0" prefWidth="63.0" text="&lt;---" />
             </children>
         </VBox>
-            <Button fx:id="btnCloseProgram" layoutX="830.0" layoutY="456.0" mnemonicParsing="false" text="Close" />
-            <Button fx:id="btnDeleteSong" layoutX="759.0" layoutY="456.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
+            <Button layoutX="830.0" layoutY="456.0" mnemonicParsing="false" onAction="#closeProgram" text="Close" />
+            <Button layoutX="759.0" layoutY="456.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
     </children>
 </AnchorPane>
