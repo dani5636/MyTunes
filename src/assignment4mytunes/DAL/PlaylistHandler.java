@@ -125,6 +125,23 @@ public class PlaylistHandler {
         File file = new File("DATA/Playlist/" + fileName);
         if (file.exists()) {
             file.delete();
+            
         }
-    }
+      }
+    
+    public void renamePlaylist (Playlist playlist)
+      {
+        String fileName = playlist.getName() + ".pll";
+        File file = new File("DATA/Playlist/" + fileName);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(PlaylistHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+        
+      }
 }

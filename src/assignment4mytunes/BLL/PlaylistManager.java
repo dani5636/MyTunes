@@ -35,5 +35,10 @@ public class PlaylistManager {
         pHandler.removePlaylist(playlist);
         
     }
+    
+    public void renamePlaylist(Playlist playlist)
+      {
+        pHandler.renamePlaylist(playlist);
+      }
 
 }
