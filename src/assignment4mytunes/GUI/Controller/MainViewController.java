@@ -433,26 +433,49 @@ public class MainViewController implements Initializable {
     @FXML
     private void prev(ActionEvent event) {
         if (mp != null) {
-            /*mp.stop();
+            mp.stop();
             System.out.println("does nothing");
-            if (songPlaying > 0) {
-                songPlaying--;
+            Music music = null;
+            if (playingFrom == SONGS_ON_PLAYLIST) {
+                if (songPlaying > 0) {
+                    songPlaying--;
+                    tblSongsOnPlaylist.getSelectionModel().clearAndSelect(songPlaying);
+                    System.out.println("reaches here?");
+                    music = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
 
-                System.out.println("reaches here?");
-
-            } else {
-                songPlaying = currentlyPlaying.size() - 1;
-                System.out.println("Does this when reaching the end");
+                } else {
+                    songPlaying = tblSongsOnPlaylist.getItems().size() - 1;
+                    System.out.println("Does this when reaching the end");
+                    tblSongsOnPlaylist.getSelectionModel().clearAndSelect(songPlaying);
+                    music = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
+                }
             }
-            Music music = currentlyPlaying.get(songPlaying);
-            String path = music.getPath();
-            lblCurrentSong.setText("Song: "
-                    + music.getTitle()
-                    + " Artist: "
-                    + music.getArtist());
-            Media media = new Media(new File(path).toURI().toString());
-            mp = new MediaPlayer(media);
-            playSong();*/
+            if (playingFrom == ALL_SONGS) {
+                if (songPlaying > 0) {
+                    songPlaying--;
+                    tblAllSongs.getSelectionModel().clearAndSelect(songPlaying);
+                    System.out.println("reaches here?");
+                    music = tblAllSongs.getSelectionModel().getSelectedItem();
+
+                } else {
+                    songPlaying = tblAllSongs.getItems().size() - 1;
+                    System.out.println("Does this when reaching the end");
+                    tblAllSongs.getSelectionModel().clearAndSelect(songPlaying);
+                    music = tblAllSongs.getSelectionModel().getSelectedItem();
+                }
+            }
+            if (music != null) {
+                String path = music.getPath();
+                lblCurrentSong.setText("Song: "
+                        + music.getTitle()
+                        + " Artist: "
+                        + music.getArtist());
+                Media media = new Media(new File(path).toURI().toString());
+                mp = new MediaPlayer(media);
+
+                playSong();
+            }
+
         }
     }
 
