@@ -105,7 +105,8 @@ public class MainViewController implements Initializable {
     private int playingFrom;
 
     private int lastClicked;
-    MediaPlayer mp = null;
+    private MediaPlayer mp = null;
+    private MediaPlayer nextMp = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -248,6 +249,7 @@ public class MainViewController implements Initializable {
                 || status == Status.UNKNOWN) {
             btnPlayPause.setText("Pause");
             mp.play();
+            mp.setOnEndOfMedia(new endOfSongEvent());
             volumeSlider.setValue(mp.getVolume() * 100);
             volumeSlider.valueProperty().addListener(new InvalidationListener() {
 
@@ -256,22 +258,7 @@ public class MainViewController implements Initializable {
                     mp.setVolume(volumeSlider.getValue() / 100);
                 }
             });
-            /*
-            for (int i = 0; i < players.size(); i++) {
-                Music music = tblAllSongs.getItems().get(i);
-                final MediaPlayer player
-                        = 
-                final MediaPlayer nextPlayer = players.get((i + 1) % players.size());
-                player.setOnEndOfMedia(new Runnable() {
-                    @Override
-                    public void run() {
-                        player.currentTimeProperty().removeListener(progressChangeListener);
-                        player.getMedia().getMetadata().removeListener(metadataChangeListener);
-                        player.stop();
-                        mediaView.setMediaPlayer(nextPlayer);
-                        nextPlayer.play();
-                    }
-                })};*/
+
             System.out.println("should be playing");
 
         } else {
@@ -548,5 +535,15 @@ public class MainViewController implements Initializable {
             }
         }
         return searchList;
+
     }
+
+    private class endOfSongEvent implements Runnable {
+
+        public void run() {
+            System.out.println("End of song");
+            next(null);
+        }
+    }
+
 }
